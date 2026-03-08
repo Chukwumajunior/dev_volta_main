@@ -95,7 +95,20 @@ class PostController extends Controller
             $data['image'] = $request->file('image')->store('images', 'public');
         }
 
-        $data['slug'] = Str::slug($data['title']);
+        $slug = Str::slug($data['title']);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (
+        Post::where('slug', $slug)
+            ->where('id', '!=', $post->id)
+            ->exists()
+        ) {
+            $slug = $originalSlug . '-' . $count++;
+        }
+
+        $data['slug'] = $slug;
+
         $post->update($data);
 
         return redirect()->back()->with('message', 'Post updated successfully');
