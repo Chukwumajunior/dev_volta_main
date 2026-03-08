@@ -15,6 +15,18 @@ use App\Http\Controllers\StudentDashboardController;
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
+Route::get('/storage/{path}', function ($path) {
+
+    $file = storage_path('app/public/' . $path);
+
+    if (!File::exists($file)) {
+        abort(404);
+    }
+
+    return Response::file($file);
+
+})->where('path', '.*');
+
 Route::get('/terms-and-conditions', function () {
     return view('terms_&_conditions');
 });

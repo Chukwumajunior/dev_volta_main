@@ -7,168 +7,104 @@
     <meta name="description" content="@yield('meta_description', 'Voltafrik - Web development company and tech training provider in Nigeria.')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logo5.png') }}">
-
-    <!-- Alpine.js -->
     <script src="//unpkg.com/alpinejs" defer></script>
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <style>
         [x-cloak] { display: none !important; }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .nav-link {
-            position: relative;
-            color: #f57813;
-        }
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: #f57813;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover:after,
-        .nav-link.active:after {
-            width: 70%;
-        }
-        .nav-link.active {
-            color: #0dcaf0;
-            border-bottom-color: #0dcaf0;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
-
     @stack('styles')
 </head>
-<body class="text-[#0a2540] overflow-x-hidden"
-      x-data="{
-          scrolled: false,
-          mobileMenuOpen: false
-      }"
-      x-init="window.addEventListener('scroll', () => scrolled = window.pageYOffset > 50)"
-      :class="{ 'pt-24': scrolled }"
-      @keydown.escape="mobileMenuOpen = false">
+<body class="text-[#0a2540] overflow-x-hidden" x-data="{ scrolled: false, mobileMenuOpen: false }" x-init="window.addEventListener('scroll', () => scrolled = window.pageYOffset > 300)" :class="{ 'pt-20': scrolled }">
 
-<!-- Navigation -->
-<nav class="fixed top-0 w-full z-50 transition-all duration-300"
-     :class="{
-             'backdrop-blur-md bg-white/95 shadow-lg border-b border-gray-200/50': scrolled,
-             'bg-transparent': !scrolled
-         }">
-    <div class="container max-w-7xl mx-auto px-4">
-        <div class="flex items-center justify-between py-4">
-            <!-- Logo -->
-            <a href="/" class="flex items-center gap-2">
-                <img src="{{ asset('assets/img/logo5.png') }}" alt="Voltafrik" class="h-10 w-auto">
-                <span class="font-extrabold text-2xl tracking-tighter">VOLTAFRIK</span>
-            </a>
-
-            <div class="hidden lg:flex items-center gap-1">
-                <div class="flex items-center">
-                    <a href="/" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
-                    <a href="{{ route('about') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition {{ request()->routeIs('about') ? 'active' : '' }}">About</a>
-                    <a href="{{ route('careers') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition {{ request()->routeIs('careers') ? 'active' : '' }}">Tech Academy</a>
-                    <a href="{{ route('projects') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition {{ request()->routeIs('projects') ? 'active' : '' }}">Projects</a>
-                    <a href="{{ route('blog.stores') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition {{ request()->routeIs('blog.stores') ? 'active' : '' }}">Market</a>
-                    <a href="{{ route('contact') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
-                </div>
-
-                @auth
-                    <div class="relative ml-3" x-data="{ accountDropdown: false }">
-                        <button
-                            @mouseenter="accountDropdown = true"
-                            @mouseleave="accountDropdown = false"
-                            class="bg-[#0a2540] hover:bg-[#f57813] text-white font-bold py-3 px-7 rounded-full transition-all hover:-translate-y-1 flex items-center gap-2"
-                        >
-                            Account <i class="bi bi-chevron-down" :class="{ 'rotate-180': accountDropdown }"></i>
-                        </button>
-                        <div
-                            x-show="accountDropdown"
-                            x-cloak
-                            @mouseenter="accountDropdown = true"
-                            @mouseleave="accountDropdown = false"
-                            class="absolute right-0 top-full mt-0 pt-2 w-64"
-                        >
-                            <div class="bg-white shadow-xl rounded-lg p-3 border-0">
-                                <a href="{{ auth()->user()->role === 'admin' ? route('dashboard') : route('student.dashboard') }}" class="block py-2 px-3 hover:bg-gray-50 rounded transition"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
-                                <a href="{{ route('profile.edit') }}" class="block py-2 px-3 hover:bg-gray-50 rounded transition"><i class="bi bi-person me-2"></i> Profile</a>
-                                <hr class="my-2">
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="w-full text-left py-2 px-3 hover:bg-gray-50 rounded transition text-red-600"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @else
-                    <a href="/login" class="bg-[#0a2540] hover:bg-[#f57813] text-white font-bold py-3 px-7 rounded-full transition-all hover:-translate-y-1 ml-3">Get Started</a>
-                @endauth
+<nav class="fixed top-0 w-full z-50 py-4 transition-all duration-300" :class="{ 'backdrop-blur-md bg-white/80 border-b border-black/5': true }">
+    <div class="container max-w-7xl mx-auto px-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2">
+            <img src="{{ asset('assets/img/logo5.png') }}" alt="Voltafrik" class="h-10 w-auto">
+            <span class="font-extrabold text-2xl tracking-tighter">VOLTAFRIK</span>
+        </a>
+        <button class="lg:hidden text-2xl" @click="mobileMenuOpen = !mobileMenuOpen">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="hidden lg:flex items-center gap-1">
+            <div class="flex items-center">
+                <a href="/" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Home</a>
+                <a href="{{ route('about') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">About</a>
+                <a href="{{ route('careers') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Tech Academy</a>
+                <a href="{{ route('projects') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Projects</a>
+                <a href="{{ route('blog.stores') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Market</a>
+                <a href="{{ route('contact') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Contact</a>
             </div>
-
-            <!-- Mobile Menu Button -->
-            <button class="lg:hidden text-2xl" @click="mobileMenuOpen = !mobileMenuOpen">
-                <i class="bi" :class="mobileMenuOpen ? 'bi-x-lg' : 'bi-list'"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div x-show="mobileMenuOpen"
-             x-cloak
-             @click.away="mobileMenuOpen = false"
-             class="lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-t border-black/5 p-5">
-            <div class="flex flex-col gap-3">
-                <a href="/" class="py-2 font-semibold hover:text-[#f57813] transition">Home</a>
-                <a href="{{ route('about') }}" class="py-2 font-semibold hover:text-[#f57813] transition">About</a>
-                <a href="{{ route('careers') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Tech Academy</a>
-                <a href="{{ route('projects') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Projects</a>
-                <a href="{{ route('blog.stores') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Market</a>
-                <a href="{{ route('contact') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Contact</a>
-                <hr class="my-2">
-                @auth
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="w-full text-left py-2 font-semibold hover:text-[#f57813] transition flex items-center justify-between">
-                            Account <i class="bi" :class="open ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
-                        </button>
-                        <div x-show="open" x-cloak class="pl-4 flex flex-col gap-2 mt-1">
-                            <a href="{{ auth()->user()->role === 'admin' ? route('dashboard') : route('student.dashboard') }}" class="py-1 hover:text-[#f57813] transition"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
-                            <a href="{{ route('profile.edit') }}" class="py-1 hover:text-[#f57813] transition"><i class="bi bi-person me-2"></i> Profile</a>
-                            <hr>
+            @auth
+                <div class="relative ml-3" x-data="{ accountDropdown: false }">
+                    <button
+                        @mouseenter="accountDropdown = true"
+                        @mouseleave="accountDropdown = false"
+                        class="bg-[#0a2540] hover:bg-[#f57813] text-white font-bold py-3 px-7 rounded-full transition-all hover:-translate-y-1 flex items-center gap-2"
+                    >
+                        Account <i class="bi bi-chevron-down" :class="{ 'rotate-180': accountDropdown }"></i>
+                    </button>
+                    <div
+                        x-show="accountDropdown"
+                        x-cloak
+                        @mouseenter="accountDropdown = true"
+                        @mouseleave="accountDropdown = false"
+                        class="absolute right-0 top-full mt-0 pt-2 w-64"
+                    >
+                        <div class="bg-white shadow-xl rounded-lg p-3 border-0">
+                            <a href="{{ auth()->user()->role === 'admin' ? route('dashboard') : route('student.dashboard') }}" class="block py-2 px-3 hover:bg-gray-50 rounded transition"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
+                            <a href="{{ route('profile.edit') }}" class="block py-2 px-3 hover:bg-gray-50 rounded transition"><i class="bi bi-person me-2"></i> Profile</a>
+                            <hr class="my-2">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="w-full text-left py-1 text-red-600 hover:text-[#f57813] transition"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button>
+                                <button type="submit" class="w-full text-left py-2 px-3 hover:bg-gray-50 rounded transition text-red-600"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button>
                             </form>
                         </div>
                     </div>
-                @else
-                    <a href="/login" class="bg-[#0a2540] text-white font-bold py-3 px-7 rounded-full text-center hover:bg-[#f57813] transition-all">Get Started</a>
-                @endauth
-            </div>
+                </div>
+            @else
+                <a href="/login" class="bg-[#0a2540] hover:bg-[#f57813] text-white font-bold py-3 px-7 rounded-full transition-all hover:-translate-y-1 ml-3">Get Started</a>
+            @endauth
+        </div>
+    </div>
+
+    <div x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false" class="lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-t border-black/5 p-5">
+        <div class="flex flex-col gap-3">
+            <a href="/" class="py-2 font-semibold hover:text-[#f57813] transition">Home</a>
+            <a href="{{ route('about') }}" class="py-2 font-semibold hover:text-[#f57813] transition">About</a>
+            <a href="{{ route('careers') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Tech Academy</a>
+            <a href="{{ route('projects') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Projects</a>
+            <a href="{{ route('blog.stores') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Market</a>
+            <a href="{{ route('contact') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Contact</a>
+            <hr class="my-2">
+            @auth
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full text-left py-2 font-semibold hover:text-[#f57813] transition flex items-center justify-between">
+                        Account <i class="bi" :class="open ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+                    </button>
+                    <div x-show="open" x-cloak class="pl-4 flex flex-col gap-2 mt-1">
+                        <a href="{{ auth()->user()->role === 'admin' ? route('dashboard') : route('student.dashboard') }}" class="py-1 hover:text-[#f57813] transition"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
+                        <a href="{{ route('profile.edit') }}" class="py-1 hover:text-[#f57813] transition"><i class="bi bi-person me-2"></i> Profile</a>
+                        <hr>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full text-left py-1 text-red-600 hover:text-[#f57813] transition"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button>
+                        </form>
+                    </div>
+                </div>
+            @else
+                <a href="/login" class="bg-[#0a2540] text-white font-bold py-3 px-7 rounded-full text-center hover:bg-[#f57813] transition-all">Get Started</a>
+            @endauth
         </div>
     </div>
 </nav>
 
-<!-- Main Content -->
 <main>
     @yield('body-content')
 </main>
 
-<!-- Footer -->
 <footer class="bg-[#020b14] text-white pt-20 pb-8">
     <div class="container max-w-7xl mx-auto px-4">
         <div class="grid md:grid-cols-12 gap-8 border-b border-gray-700 pb-12">
@@ -210,17 +146,14 @@
     </div>
 </footer>
 
-<!-- Back to Top Button -->
 <a href="#" x-show="scrolled" x-cloak @click.prevent="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed right-5 bottom-5 w-12 h-12 bg-[#f57813] hover:bg-[#0a2540] text-white rounded-full flex items-center justify-center text-3xl transition-all hover:-translate-y-1 shadow-lg z-50">
     <i class="bi bi-arrow-up-short"></i>
 </a>
 
-<!-- Scripts -->
 <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
 <script>
     AOS.init({ duration: 1000, once: true });
 </script>
-
 @stack('scripts')
 </body>
 </html>
