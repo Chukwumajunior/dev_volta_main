@@ -13,14 +13,14 @@
     visiblePosts: 10,
     visibleUsers: 10,
     showUserModal: false,
-    newUser: { name: '', email: '', role: 'writer' }
+    newUser: { name: '', email: '', phone: '', role: 'writer' }
 }" class="bg-[#fcfdfe] text-[#0a2540] overflow-hidden">
 
         <section class="relative pt-24 pb-12" style="background: linear-gradient(135deg, #fff 0%, #eef6ff 100%); border-bottom: 1px solid rgba(0, 112, 243, 0.1);">
             <div class="container max-w-7xl mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                     <div>
-                        <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Systems Control Center</h1>
+                        <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Admin Dashboard</h1>
                         <div class="flex flex-wrap gap-3">
                             <div class="bg-white px-4 py-2 rounded-xl border border-gray-200 flex items-center gap-2">
                                 <i class="bi bi-chat-dots text-[#0070f3]"></i>
@@ -47,7 +47,7 @@
         <div class="container max-w-7xl mx-auto px-4 py-8">
             @if ($errors->any())
                 <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
-                    <h6 class="font-bold text-red-800 mb-2">System Alerts:</h6>
+                    <h6 class="font-bold text-red-800 mb-2">Please fix these errors:</h6>
                     <ul class="text-sm text-red-600 list-disc list-inside">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -56,20 +56,18 @@
                 </div>
             @endif
 
-            <!-- Tabs -->
             <div class="flex gap-2 mb-6 border-b border-gray-200">
-                <button @click="activeTab = 'users'" class="px-5 py-3 font-semibold transition" :class="activeTab === 'users' ? 'text-[#0070f3] border-b-2 border-[#0070f3]' : 'text-gray-500 hover:text-[#0070f3]'">User Directory</button>
-                <button @click="activeTab = 'content'" class="px-5 py-3 font-semibold transition" :class="activeTab === 'content' ? 'text-[#0070f3] border-b-2 border-[#0070f3]' : 'text-gray-500 hover:text-[#0070f3]'">Content Deployment</button>
-                <button @click="activeTab = 'messages'" class="px-5 py-3 font-semibold transition" :class="activeTab === 'messages' ? 'text-[#0070f3] border-b-2 border-[#0070f3]' : 'text-gray-500 hover:text-[#0070f3]'">Communications</button>
+                <button @click="activeTab = 'users'" class="px-5 py-3 font-semibold transition" :class="activeTab === 'users' ? 'text-[#0070f3] border-b-2 border-[#0070f3]' : 'text-gray-500 hover:text-[#0070f3]'">Users</button>
+                <button @click="activeTab = 'content'" class="px-5 py-3 font-semibold transition" :class="activeTab === 'content' ? 'text-[#0070f3] border-b-2 border-[#0070f3]' : 'text-gray-500 hover:text-[#0070f3]'">Posts</button>
+                <button @click="activeTab = 'messages'" class="px-5 py-3 font-semibold transition" :class="activeTab === 'messages' ? 'text-[#0070f3] border-b-2 border-[#0070f3]' : 'text-gray-500 hover:text-[#0070f3]'">Messages</button>
             </div>
 
-            <!-- Users Tab -->
             <div x-show="activeTab === 'users'" x-cloak x-transition>
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 border-b border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                        <h5 class="font-extrabold uppercase text-sm">User Directory</h5>
+                        <h5 class="font-extrabold uppercase text-sm">All Users</h5>
                         <div class="flex flex-wrap gap-3 w-full md:w-auto">
-                            <input type="text" x-model="searchUsers" class="px-4 py-2 rounded-full border border-gray-200 text-sm flex-grow md:flex-grow-0 md:w-64" placeholder="Search Identity...">
+                            <input type="text" x-model="searchUsers" class="px-4 py-2 rounded-full border border-gray-200 text-sm flex-grow md:flex-grow-0 md:w-64" placeholder="Search by name or email...">
                             <select x-model="roleFilter" class="px-4 py-2 rounded-full border border-gray-200 text-sm bg-white">
                                 <option value="">All Roles</option>
                                 <option value="admin">Admin</option>
@@ -78,7 +76,7 @@
                                 <option value="guest">Guest</option>
                             </select>
                             <button @click="showUserModal = true" class="bg-[#0070f3] hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2">
-                                <i class="bi bi-plus-lg"></i> New User
+                                <i class="bi bi-plus-lg"></i> Add User
                             </button>
                         </div>
                     </div>
@@ -86,10 +84,10 @@
                         <table class="w-full text-sm">
                             <thead class="bg-[#eef6ff] text-[#0070f3] text-xs uppercase font-bold">
                             <tr>
-                                <th class="px-5 py-3 text-left">Identity</th>
+                                <th class="px-5 py-3 text-left">Name</th>
                                 <th class="px-5 py-3 text-left">Contact</th>
-                                <th class="px-5 py-3 text-left">Authorization Role</th>
-                                <th class="px-5 py-3 text-right">Operations</th>
+                                <th class="px-5 py-3 text-left">Role</th>
+                                <th class="px-5 py-3 text-right">Actions</th>
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
@@ -118,7 +116,7 @@
                                         </select>
                                     </td>
                                     <td class="px-5 py-3 text-right">
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline" @submit.prevent="if(confirm('Terminate user access?')) $el.submit()">
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline" @submit.prevent="if(confirm('Delete this user?')) $el.submit()">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:text-red-700">
                                                 <i class="bi bi-trash3"></i>
@@ -131,18 +129,17 @@
                         </table>
                     </div>
                     <div class="px-5 py-3 text-center border-t border-gray-100">
-                        <button @click="visibleUsers += 10" class="text-[#0070f3] font-semibold text-sm hover:underline">LOAD ADDITIONAL USERS</button>
+                        <button @click="visibleUsers += 10" class="text-[#0070f3] font-semibold text-sm hover:underline">Show More Users</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Content Tab -->
             <div x-show="activeTab === 'content'" x-cloak x-transition>
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 border-b border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                        <h5 class="font-extrabold uppercase text-sm">Content Deployment Panel</h5>
+                        <h5 class="font-extrabold uppercase text-sm">All Posts</h5>
                         <div class="flex flex-wrap gap-3 w-full md:w-auto">
-                            <input type="text" x-model="searchPosts" class="px-4 py-2 rounded-full border border-gray-200 text-sm flex-grow md:flex-grow-0 md:w-64" placeholder="Filter Posts...">
+                            <input type="text" x-model="searchPosts" class="px-4 py-2 rounded-full border border-gray-200 text-sm flex-grow md:flex-grow-0 md:w-64" placeholder="Search posts...">
                             <select x-model="postTypeFilter" class="px-4 py-2 rounded-full border border-gray-200 text-sm bg-white">
                                 <option value="">All Types</option>
                                 @foreach ($all_posts->pluck('type')->unique() as $type)
@@ -152,17 +149,17 @@
                         </div>
                     </div>
                     <div class="px-5 py-3 bg-gray-50 border-b border-gray-100 text-sm text-gray-600">
-                        Total Assets: <strong>{{ count($all_posts) }}</strong>
+                        Total Posts: <strong>{{ count($all_posts) }}</strong>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm">
                             <thead class="bg-[#eef6ff] text-[#0070f3] text-xs uppercase font-bold">
                             <tr>
                                 <th class="px-5 py-3 text-left">Author</th>
-                                <th class="px-5 py-3 text-left">Deployment Title</th>
-                                <th class="px-5 py-3 text-left">Classification</th>
-                                <th class="px-5 py-3 text-left">Status Date</th>
-                                <th class="px-5 py-3 text-left">Section</th>
+                                <th class="px-5 py-3 text-left">Title</th>
+                                <th class="px-5 py-3 text-left">Type</th>
+                                <th class="px-5 py-3 text-left">Category</th>
+                                <th class="px-5 py-3 text-left">Date</th>
                                 <th class="px-5 py-3 text-right">Actions</th>
                             </tr>
                             </thead>
@@ -175,17 +172,14 @@
                                     <td class="px-5 py-3">
                                         <a href="{{ route('blog.show', $post->slug) }}" class="font-bold text-[#0a2540] hover:text-[#0070f3] transition">{{ $post->title }}</a>
                                     </td>
-                                    <td class="px-5 py-3">
-                                        <div class="font-semibold text-xs">{{ ucfirst($post->type) }}</div>
-                                        <div class="text-xs text-gray-500">{{ ucfirst($post->category) }}</div>
-                                    </td>
+                                    <td class="px-5 py-3 text-xs">{{ ucfirst($post->type) }}</td>
+                                    <td class="px-5 py-3 text-xs">{{ ucfirst($post->category) }}</td>
                                     <td class="px-5 py-3 text-xs text-gray-500">{{ $post->created_at->format('d M, Y') }}</td>
-                                    <td class="px-5 py-3 text-xs text-gray-500">{{ $post->section }}</td>
                                     <td class="px-5 py-3 text-right">
                                         <a href="{{ route('blog.edit', $post->id) }}" class="text-yellow-600 hover:text-yellow-800 mr-3">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <form action="{{ route('blog.destroy', $post->id) }}" method="POST" class="inline" @submit.prevent="if(confirm('Delete post?')) $el.submit()">
+                                        <form action="{{ route('blog.destroy', $post->id) }}" method="POST" class="inline" @submit.prevent="if(confirm('Delete this post?')) $el.submit()">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:text-red-700">
                                                 <i class="bi bi-trash3"></i>
@@ -198,18 +192,17 @@
                         </table>
                     </div>
                     <div class="px-5 py-3 text-center border-t border-gray-100">
-                        <button @click="visiblePosts += 10" class="text-[#0070f3] font-semibold text-sm hover:underline">VIEW MORE ASSETS</button>
+                        <button @click="visiblePosts += 10" class="text-[#0070f3] font-semibold text-sm hover:underline">Show More Posts</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Messages Tab -->
             <div x-show="activeTab === 'messages'" x-cloak x-transition>
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 border-b border-gray-100">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <h5 class="font-extrabold uppercase text-sm">Communication Inbox</h5>
-                            <input type="text" x-model="searchMessages" class="px-4 py-2 rounded-full border border-gray-200 text-sm w-full md:w-64" placeholder="Filter messages...">
+                            <h5 class="font-extrabold uppercase text-sm">Contact Messages</h5>
+                            <input type="text" x-model="searchMessages" class="px-4 py-2 rounded-full border border-gray-200 text-sm w-full md:w-64" placeholder="Search messages...">
                         </div>
                     </div>
                     <div class="p-5 space-y-3 max-h-[500px] overflow-y-auto">
@@ -224,9 +217,9 @@
                                     </div>
                                 </div>
                                 <p class="text-sm text-gray-600 mb-3">{{ $message->message }}</p>
-                                <form action="{{ route('contact.destroy', $message->id) }}" method="POST" @submit.prevent="if(confirm('Archive message?')) $el.submit()">
+                                <form action="{{ route('contact.destroy', $message->id) }}" method="POST" @submit.prevent="if(confirm('Delete this message?')) $el.submit()">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="text-xs text-red-500 hover:text-red-700 font-semibold">Archive</button>
+                                    <button type="submit" class="text-xs text-red-500 hover:text-red-700 font-semibold">Delete</button>
                                 </form>
                             </div>
                         @endforeach
@@ -234,12 +227,11 @@
                 </div>
             </div>
 
-            <!-- New User Modal -->
             <div x-show="showUserModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4" @click.away="showUserModal = false">
                 <div class="absolute inset-0 bg-black/50"></div>
                 <div class="bg-white rounded-2xl max-w-md w-full p-6 relative z-10 shadow-2xl" @click.stop>
                     <div class="flex justify-between items-center mb-4">
-                        <h5 class="text-xl font-extrabold">Provision New User</h5>
+                        <h5 class="text-xl font-extrabold">Add New User</h5>
                         <button @click="showUserModal = false" class="text-2xl">&times;</button>
                     </div>
                     <form action="{{ route('store_users') }}" method="POST" @submit="$el.submit()">
@@ -254,14 +246,18 @@
                                 <input type="email" name="email" x-model="newUser.email" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" required>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Role Assignment</label>
+                                <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Phone Number</label>
+                                <input type="tel" name="phone" x-model="newUser.phone" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Role</label>
                                 <select name="role" x-model="newUser.role" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition bg-white" required>
                                     <option value="writer">Writer</option>
                                     <option value="guest">Guest</option>
                                 </select>
                             </div>
                             <button type="submit" class="w-full bg-[#0070f3] hover:bg-blue-700 text-white font-bold py-3 rounded-full transition mt-2">
-                                Provision Asset
+                                Add User
                             </button>
                         </div>
                     </form>

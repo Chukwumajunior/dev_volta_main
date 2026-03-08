@@ -1,378 +1,284 @@
 @extends('layouts.app')
 
-@section('title', 'Admin | Applications')
+@section('title', 'Control Center | Applications')
 
 @section('body-content')
+    <div x-data="{
+    recipientType: 'all',
+    trackId: '',
+    studentEmail: '',
+    message: '',
+    selectedBatch: '{{ request('batch') }}',
+    filterEmail: '{{ request('email') }}',
+    filterCareer: '{{ request('career') }}',
+    showExportMenu: false
+}" class="bg-[#fcfdfe] text-[#0a2540] overflow-hidden">
 
-    <style>
-        :root {
-            --ev-blue: #0070f3;
-            --ev-light-blue: #eef6ff;
-            --ev-text: #0a2540;
-        }
-
-        body { background-color: #fcfdfe; color: var(--ev-text); }
-
-        .admin-hero {
-            padding: 100px 0 40px;
-            background: linear-gradient(135deg, #fff 0%, var(--ev-light-blue) 100%);
-            border-bottom: 1px solid rgba(0, 112, 243, 0.1);
-        }
-
-        .stat-pill {
-            background: white;
-            padding: 10px 20px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            display: inline-flex;
-            align-items: center;
-            margin-right: 10px;
-        }
-
-        .admin-card {
-            background: white;
-            border-radius: 24px;
-            border: 1px solid #edf2f7;
-            box-shadow: 0 10px 30px rgba(10, 37, 64, 0.04);
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .card-header-ev {
-            background: #f8fafc;
-            padding: 20px 30px;
-            border-bottom: 1px solid #edf2f7;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .ev-table thead {
-            background: var(--ev-light-blue);
-            color: var(--ev-blue);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
-
-        .ev-table th, .ev-table td {
-            padding: 15px 20px;
-            vertical-align: middle;
-            border-color: #f1f5f9;
-        }
-
-        .msg-item {
-            border-left: 4px solid var(--ev-blue);
-            margin-bottom: 15px;
-            background: #fff;
-            transition: 0.3s;
-        }
-
-        .msg-item:hover { transform: translateX(5px); }
-
-        .btn-ev {
-            border-radius: 100px;
-            padding: 8px 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-    </style>
-
-    <section class="admin-hero">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-end">
-                <div>
-                    <h1 class="fw-900 mb-2">Systems Control Center</h1>
-                    <div class="stat-pill"><i class="bi bi-chat-dots me-2 text-primary"></i> {{ count($messages) }} Messages</div>
-                    <div class="stat-pill"><i class="bi bi-people me-2 text-primary"></i> {{ count($users) }} Users</div>
-                </div>
-                <div class="d-flex gap-2">
-                    <a href="{{ route('blog.create') }}" class="btn btn-primary btn-ev shadow-sm">
-                        <i class="bi bi-plus-lg me-1"></i> New Post
-                    </a>
-                    <a href="{{ route('admin.careers') }}" class="btn btn-outline-dark btn-ev">
-                        <i class="bi bi-briefcase me-1"></i> Applications
-                    </a>
+        <section class="relative pt-24 pb-12" style="background: linear-gradient(135deg, #fff 0%, #eef6ff 100%); border-bottom: 1px solid rgba(0, 112, 243, 0.1);">
+            <div class="container max-w-7xl mx-auto px-4">
+                <nav class="mb-4">
+                    <ol class="flex items-center space-x-2 text-sm">
+                        <li><a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-[#0070f3] transition">Systems</a></li>
+                        <li class="text-gray-400">/</li>
+                        <li class="text-[#0a2540] font-semibold">Talent Pipeline</li>
+                    </ol>
+                </nav>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Career Applications</h1>
+                        <p class="text-gray-600">Manage batch enrollments and specialized career track recruitment.</p>
+                    </div>
+                    <div class="text-left md:text-right">
+                        <span class="inline-block bg-[#0070f3] text-white rounded-full px-4 py-2 text-sm font-semibold">Total: {{ $applications->total() }} Profiles</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="container py-5">
-        @if ($errors->any())
-            <div class="alert alert-danger rounded-4 border-0 shadow-sm mb-5 p-4">
-                <h6 class="fw-bold">System Alerts:</h6>
-                <ul class="mb-0 small">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <div class="admin-card">
-            <div class="card-header-ev">
-                <h5 class="mb-0 fw-800 text-uppercase" style="letter-spacing: 1px;">User Directory</h5>
-                <div class="d-flex gap-2">
-                    <input type="text" id="userSearch" class="form-control form-control-sm rounded-pill px-3" placeholder="Search Identity...">
-                    <select id="roleFilter" class="form-select form-select-sm rounded-pill">
-                        <option value="">All Roles</option>
-                        <option value="admin">Admin</option>
-                        <option value="writer">Writer</option>
-                        <option value="student">Student</option>
-                        <option value="guest">Guest</option>
-                    </select>
+        <div class="container max-w-7xl mx-auto px-4 py-8">
+            @if(session('success'))
+                <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-5 flex items-center" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)">
+                    <i class="bi bi-check-circle-fill text-green-600 mr-3"></i>
+                    <span class="text-green-700">{{ session('success') }}</span>
                 </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table ev-table mb-0" id="usersTable">
-                    <thead>
-                    <tr>
-                        <th>Identity</th>
-                        <th>Contact</th>
-                        <th>Authorization Role</th>
-                        <th class="text-end">Operations</th>
-                    </tr>
-                    </thead>
-                    <tbody id="usersBody">
-                    @foreach($users as $user)
-                        <tr data-role="{{ $user->role }}" data-name="{{ strtolower($user->name) }}" data-email="{{ strtolower($user->email) }}">
-                            <td>
-                                <div class="fw-bold">
-                                    @if($user->role === 'student')
-                                        <a href="{{ route('admin.student.dashboard', $user->id) }}" class="text-primary">{{ $user->name }}</a>
-                                    @else
-                                        {{ $user->name }}
-                                    @endif
+            @endif
+
+            <div class="grid lg:grid-cols-12 gap-6">
+                <!-- Left Sidebar -->
+                <div class="lg:col-span-4 space-y-5">
+                    <!-- Network Broadcast -->
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
+                        <div class="px-5 py-4 bg-gray-50 border-b border-gray-100">
+                            <h6 class="font-extrabold uppercase text-sm flex items-center"><i class="bi bi-megaphone mr-2 text-[#0070f3]"></i>Network Broadcast</h6>
+                        </div>
+                        <div class="p-5">
+                            <form method="POST" action="{{ route('admin.messages.send') }}" @submit="$el.submit()">
+                                @csrf
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Recipient Protocol</label>
+                                        <select name="recipient_type" x-model="recipientType" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition bg-white">
+                                            <option value="all">Global (All Students)</option>
+                                            <option value="track">Track Specific</option>
+                                            <option value="student">Direct (Single Student)</option>
+                                        </select>
+                                    </div>
+
+                                    <div x-show="recipientType === 'track'" x-cloak x-transition>
+                                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Select Career Track</label>
+                                        <select name="track_id" x-model="trackId" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition bg-white">
+                                            @foreach($tracks as $track)
+                                                <option value="{{ $track->id }}">{{ $track->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div x-show="recipientType === 'student'" x-cloak x-transition>
+                                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">User Email Address</label>
+                                        <input type="email" name="student_email" x-model="studentEmail" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" placeholder="user@voltafrik.com">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Transmission Body</label>
+                                        <textarea name="message" x-model="message" rows="4" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" placeholder="Enter message..." required></textarea>
+                                    </div>
+
+                                    <button type="submit" class="w-full bg-[#0070f3] hover:bg-blue-700 text-white font-bold py-3 rounded-full transition-all hover:-translate-y-1 shadow-md">
+                                        Send Transmission
+                                    </button>
                                 </div>
-                                <small class="text-muted">ID: {{ $user->id }}</small>
-                            </td>
-                            <td>
-                                <div class="small">{{ $user->email }}</div>
-                                <div class="small text-muted">{{ $user->phone }}</div>
-                            </td>
-                            <td>
-                                <select class="form-select form-select-sm role-select rounded-pill" data-user-id="{{ $user->id }}">
-                                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="writer" {{ $user->role == 'writer' ? 'selected' : '' }}>Writer</option>
-                                    <option value="guest" {{ $user->role == 'guest' ? 'selected' : '' }}>Guest</option>
-                                    <option value="student" {{ $user->role == 'student' ? 'selected' : '' }}>Student</option>
-                                </select>
-                            </td>
-                            <td class="text-end">
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-link text-danger p-0" onclick="return confirm('Terminate user access?')">
-                                        <i class="bi bi-trash3"></i>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Enrollment Window -->
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
+                        <div class="px-5 py-4 bg-gray-50 border-b border-gray-100">
+                            <h6 class="font-extrabold uppercase text-sm flex items-center"><i class="bi bi-calendar-event mr-2 text-[#0070f3]"></i>Enrollment Window</h6>
+                        </div>
+                        <div class="p-5">
+                            <form action="{{ route('application-windows.store') }}" method="POST" @submit="$el.submit()">
+                                @csrf
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Batch ID</label>
+                                        <input type="text" name="batch" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" placeholder="e.g., A" required>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Open Date</label>
+                                            <input type="date" name="start_date" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Close Date</label>
+                                            <input type="date" name="end_date" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="w-full border-2 border-[#0a2540] hover:bg-[#0a2540] hover:text-white font-bold py-3 rounded-full transition-all mt-2">
+                                        Initialize Window
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - Applications Table -->
+                <div class="lg:col-span-8">
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden">
+                        <div class="px-5 py-4 bg-gray-50 border-b border-gray-100 flex flex-wrap gap-3 justify-between items-center">
+                            <h6 class="font-extrabold uppercase text-sm">Application Ledger</h6>
+                            <div class="flex gap-2">
+                                <div class="relative" @click.away="showExportMenu = false">
+                                    <button @click="showExportMenu = !showExportMenu" class="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-full transition flex items-center gap-2">
+                                        <i class="bi bi-file-earmark-excel"></i> Export
+                                    </button>
+                                    <div x-show="showExportMenu" x-cloak class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-20">
+                                        <button @click="exportToExcel('current')" class="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">Current View</button>
+                                        <button @click="exportToExcel('all')" class="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm">All Applications</button>
+                                    </div>
+                                </div>
+                                <form method="POST" action="{{ route('admin.careers.clearAll') }}" onsubmit="return confirm('CRITICAL: Purge all selected records?')">
+                                    @csrf
+                                    <input type="hidden" name="batch" value="{{ request('batch') }}">
+                                    <button type="submit" class="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white text-sm font-semibold px-4 py-2 rounded-full transition">
+                                        Clear
                                     </button>
                                 </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="p-3 text-center border-top">
-                <button id="toggleUsers" class="btn btn-link text-decoration-none fw-bold small">LOAD ADDITIONAL USERS</button>
+                            </div>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="p-4 bg-gray-50 border-b border-gray-200">
+                            <form method="GET" id="filterForm" class="grid grid-cols-1 md:grid-cols-4 gap-2">
+                                <select name="batch" x-model="selectedBatch" class="px-3 py-2 rounded-xl border border-gray-200 text-sm">
+                                    <option value="">Select Batch</option>
+                                    @foreach(['A', 'B', 'C', 'D'] as $batch)
+                                        <option value="{{ $batch }}">Batch {{ $batch }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" name="email" x-model="filterEmail" class="px-3 py-2 rounded-xl border border-gray-200 text-sm" placeholder="Filter Email">
+                                <input type="text" name="career" x-model="filterCareer" class="px-3 py-2 rounded-xl border border-gray-200 text-sm" placeholder="Career Track">
+                                <button type="submit" class="bg-[#0070f3] hover:bg-blue-700 text-white text-sm font-semibold py-2 rounded-xl transition">
+                                    Apply Filters
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="overflow-x-auto">
+                            <table id="applicationsTable" class="w-full text-sm">
+                                <thead class="bg-[#eef6ff] text-[#0070f3] text-xs uppercase font-bold">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">Applicant</th>
+                                    <th class="px-4 py-3 text-left">Contact Path</th>
+                                    <th class="px-4 py-3 text-left">Career Track</th>
+                                    <th class="px-4 py-3 text-left">Batch</th>
+                                    <th class="px-4 py-3 text-left">Fiscal Status</th>
+                                </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                @forelse($applications as $app)
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-4 py-3">
+                                            <a href="{{ route('admin.student.dashboard', $app->user_id) }}" class="font-bold text-[#0a2540] hover:text-[#0070f3] transition">
+                                                {{ $app->first_name }} {{ $app->last_name }}
+                                            </a>
+                                            <div class="text-xs text-gray-500">{{ $app->gender }} | {{ $app->age }} yrs</div>
+                                        </td>
+                                        <td class="px-4 py-3">
+                                            <div class="text-sm">{{ $app->email }}</div>
+                                            <div class="text-xs text-gray-500">{{ $app->number }}</div>
+                                        </td>
+                                        <td class="px-4 py-3">
+                                            <span class="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">{{ $app->career }}</span>
+                                        </td>
+                                        <td class="px-4 py-3 font-semibold">Batch {{ $app->batch }}</td>
+                                        <td class="px-4 py-3">
+                                            <button @click="openPaymentModal({{ $app->id }}, '{{ $app->first_name }} {{ $app->last_name }}', '{{ $app->paid }}')"
+                                                    class="inline-block px-3 py-1.5 rounded-full text-xs font-bold transition hover:opacity-80"
+                                                    :class="'{{ $app->paid }}' === 'Paid' ? 'bg-green-600 text-white' : 'bg-yellow-500 text-white'">
+                                                {{ $app->paid }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="px-4 py-8 text-center text-gray-500">No active applications detected in the ledger.</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="px-4 py-3 border-t border-gray-100">
+                            {{ $applications->appends(request()->query())->links('pagination::bootstrap-4') }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row g-4 mb-5">
-            <div class="col-lg-4">
-                <div class="admin-card p-4 h-100">
-                    <h6 class="fw-800 text-uppercase mb-4">Provision New User</h6>
-                    <form action="{{ route('store_users') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label class="small fw-bold">Full Name</label>
-                            <input type="text" class="form-control" name="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="small fw-bold">Email Address</label>
-                            <input type="email" class="form-control" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="small fw-bold">Role Assignment</label>
-                            <select class="form-select" name="role" required>
-                                <option value="writer">Writer</option>
-                                <option value="guest">Guest</option>
+        <!-- Payment Modal -->
+        <div x-show="showPaymentModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4" @click.away="showPaymentModal = false">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="bg-white rounded-2xl max-w-md w-full p-6 relative z-10 shadow-2xl" @click.stop>
+                <div class="flex justify-between items-center mb-4">
+                    <h5 class="text-xl font-extrabold">Verify Fiscal Transaction</h5>
+                    <button @click="showPaymentModal = false" class="text-2xl">&times;</button>
+                </div>
+                <form method="POST" action="{{ route('admin.careers.updatePaid') }}" @submit="$el.submit()">
+                    @csrf
+                    <input type="hidden" name="id" x-model="paymentId">
+                    <div class="space-y-4">
+                        <p class="text-sm text-gray-600">Confirming payment status for: <span class="font-bold text-[#0a2540]" x-text="paymentName"></span></p>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Verification Status</label>
+                            <select name="paid" x-model="paymentStatus" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition bg-white" required>
+                                <option value="Pending">Pending</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Failed">Failed</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 btn-ev">Provision Asset</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="admin-card p-4 h-100 bg-light">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h6 class="fw-800 text-uppercase mb-0">Communication Inbox</h6>
-                        <input type="text" id="messageSearchInput" class="form-control form-control-sm w-50 rounded-pill" placeholder="Filter messages...">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Confirmation Timestamp</label>
+                            <input type="datetime-local" name="payment_confirmed_at" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" required>
+                        </div>
+                        <div class="flex gap-3 pt-2">
+                            <button type="submit" class="flex-1 bg-[#0070f3] hover:bg-blue-700 text-white font-bold py-2.5 rounded-full transition">Commit Record</button>
+                            <button type="button" @click="showPaymentModal = false" class="flex-1 border border-gray-300 hover:bg-gray-50 font-bold py-2.5 rounded-full transition">Cancel</button>
+                        </div>
                     </div>
-                    <div id="searchResults" class="overflow-auto" style="max-height: 400px;">
-                        @foreach ($messages as $message)
-                            <div class="p-3 rounded-4 msg-item shadow-sm mb-3">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="fw-bold mb-1">{{ $message->name }}</h6>
-                                    <small class="text-muted">{{ $message->email }}</small>
-                                    <small class="text-muted">{{ $message->number }}</small>
-                                </div>
-                                <p class="small text-muted mb-2">{{ $message->message }}</p>
-                                <form action="{{ route('contact.destroy', $message->id) }}" method="POST">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-link text-danger btn-sm p-0 text-decoration-none" onclick="return confirm('Archive message?')">Archive</button>
-                                </form>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="admin-card">
-            <div class="card-header-ev">
-                <h5 class="mb-0 fw-800 text-uppercase">Content Deployment Panel</h5>
-                <div class="d-flex gap-2 w-50">
-                    <input type="text" id="searchInput" class="form-control form-control-sm rounded-pill px-3" placeholder="Filter Posts...">
-                    <select id="postType" class="form-select form-select-sm rounded-pill">
-                        <option value="">All Types</option>
-                        @foreach ($all_posts->pluck('type')->unique() as $type)
-                            <option value="{{ $type }}">{{ ucfirst($type) }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="p-3 bg-light border-bottom small text-muted">
-                Total Assets: <strong>{{ count($all_posts) }}</strong> | Active Filter: <strong id="filteredPosts">0</strong>
-            </div>
-            <div class="table-responsive">
-                <table class="table ev-table mb-0">
-                    <thead>
-                    <tr>
-                        <th>Author</th>
-                        <th>Deployment Title</th>
-                        <th>Classification</th>
-                        <th>Status Date</th>
-                        <th class="text-end">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                    @foreach ($all_posts as $post)
-                        <tr data-type="{{ $post->type }}" data-category="{{ $post->category }}" data-title="{{ strtolower($post->title) }}">
-                            <td><span class="badge bg-light text-dark fw-bold">{{ $post->username }}</span></td>
-                            <td><a href="{{ route('blog.show', $post->slug) }}" class="fw-bold text-dark">{{ $post->title }}</a></td>
-                            <td>
-                                <div class="small fw-bold">{{ ucfirst($post->type) }}</div>
-                                <div class="text-muted x-small">{{ ucfirst($post->category) }}</div>
-                            </td>
-                            <td class="small text-muted">{{ $post->created_at->format('d M, Y') }}</td>
-                            <td class="text-end">
-                                <a href="{{ route('blog.edit', $post->id) }}" class="btn btn-link p-0 text-warning me-2"><i class="bi bi-pencil-square"></i></a>
-                                <form action="{{ route('blog.destroy', $post->id) }}" method="POST" class="d-inline">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Delete post?')"><i class="bi bi-trash3"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="p-3 text-center border-top">
-                <button id="togglePosts" class="btn btn-link text-decoration-none fw-bold small">VIEW MORE ASSETS</button>
+                </form>
             </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const postRows = Array.from(document.querySelectorAll("#tableBody tr"));
-            const userRows = Array.from(document.querySelectorAll("#usersBody tr"));
-            const messageItems = document.querySelectorAll("#searchResults .msg-item");
+        function exportToExcel(type) {
+            const table = document.getElementById("applicationsTable");
+            const date = new Date().toISOString().split('T')[0];
+            const fileName = `E-VOLT_Applications_${type}_${date}.xlsx`;
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Applications" });
+            XLSX.writeFile(wb, fileName);
+        }
 
-            const searchInput = document.getElementById("searchInput");
-            const postType = document.getElementById("postType");
-            const userSearch = document.getElementById("userSearch");
-            const roleFilter = document.getElementById("roleFilter");
-            const messageSearchInput = document.getElementById("messageSearchInput");
-            const filteredCounter = document.getElementById("filteredPosts");
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('dashboard', () => ({
+                showPaymentModal: false,
+                paymentId: '',
+                paymentName: '',
+                paymentStatus: 'Pending',
 
-            const togglePostsBtn = document.getElementById("togglePosts");
-            const toggleUsersBtn = document.getElementById("toggleUsers");
-
-            let visiblePostCount = 10;
-            let visibleUserCount = 10;
-
-            function filterPosts() {
-                const query = searchInput.value.toLowerCase();
-                const type = postType.value;
-                let visible = 0;
-
-                postRows.forEach((row) => {
-                    const matchesQuery = row.dataset.title.includes(query);
-                    const matchesType = !type || row.dataset.type === type;
-                    const shouldShow = matchesQuery && matchesType;
-
-                    if (shouldShow && visible < visiblePostCount) {
-                        row.style.display = "";
-                        visible++;
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
-                filteredCounter.textContent = visible;
-            }
-
-            function filterUsers() {
-                const query = userSearch.value.toLowerCase();
-                const role = roleFilter.value;
-                let visible = 0;
-
-                userRows.forEach((row) => {
-                    const matchesQuery = row.dataset.name.includes(query) || row.dataset.email.includes(query);
-                    const matchesRole = !role || row.dataset.role === role;
-                    const shouldShow = matchesQuery && matchesRole;
-
-                    if (shouldShow && visible < visibleUserCount) {
-                        row.style.display = "";
-                        visible++;
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
-            }
-
-            searchInput.addEventListener("input", filterPosts);
-            postType.addEventListener("change", filterPosts);
-            userSearch.addEventListener("input", filterUsers);
-            roleFilter.addEventListener("change", filterUsers);
-            messageSearchInput.addEventListener("input", () => {
-                const keyword = messageSearchInput.value.toLowerCase();
-                messageItems.forEach(item => {
-                    item.style.display = item.innerText.toLowerCase().includes(keyword) ? "" : "none";
-                });
-            });
-
-            togglePostsBtn.addEventListener("click", () => { visiblePostCount += 10; filterPosts(); });
-            toggleUsersBtn.addEventListener("click", () => { visibleUserCount += 10; filterUsers(); });
-
-            document.querySelectorAll(".role-select").forEach(select => {
-                select.addEventListener("change", function () {
-                    const userId = this.dataset.userId;
-                    const newRole = this.value;
-                    fetch(`/update-role/${userId}`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-                        },
-                        body: JSON.stringify({ role: newRole })
-                    }).then(r => r.json()).then(d => alert(d.message)).catch(e => alert("Update Error"));
-                });
-            });
-
-            filterPosts();
-            filterUsers();
+                openPaymentModal(id, name, status) {
+                    this.paymentId = id;
+                    this.paymentName = name;
+                    this.paymentStatus = status;
+                    this.showPaymentModal = true;
+                }
+            }));
         });
     </script>
-
 @endsection
