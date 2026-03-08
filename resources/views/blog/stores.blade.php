@@ -75,7 +75,7 @@
                             </div>
                             <div class="p-5 flex flex-col">
                                 <h5 class="font-extrabold text-lg mb-2 truncate" :title="'{{ $product->title }}'">{{ $product->title }}</h5>
-                                <div class="text-xl font-black text-[#0070f3] mb-4">₦{{ number_format($product->price, 2) }}</div>
+                                <div class="text-xl font-black text-[#0070f3] mb-4">{{ to_amount($product->price) }}</div>
                                 <a href="{{ route('blog.show', $product->slug) }}" class="border-2 border-[#0070f3] text-[#0070f3] hover:bg-[#0070f3] hover:text-white font-bold py-2.5 rounded-full text-center transition w-full">
                                     Product Specifications <i class="bi bi-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                                 </a>

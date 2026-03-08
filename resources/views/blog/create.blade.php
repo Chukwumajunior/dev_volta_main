@@ -156,7 +156,7 @@
 
                         <!-- Price (conditional) -->
                         <div x-show="selectedType === 'store'" x-cloak x-transition>
-                            <label for="price" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Price ($)</label>
+                            <label for="price" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Price ({{ get_currency() }})</label>
                             <input
                                 type="number"
                                 name="price"

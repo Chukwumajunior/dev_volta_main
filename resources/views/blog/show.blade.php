@@ -53,7 +53,7 @@
                         </span>
                         </div>
 
-                        <h3 class="text-2xl text-[#0070f3] font-bold mb-5">${{ number_format($post->price, 2) }}</h3>
+                        <h3 class="text-2xl text-[#0070f3] font-bold mb-5">{{ to_amount($post->price) }}</h3>
 
                         <div class="bg-gray-50 rounded-xl p-5 border border-gray-200 mb-6">
                             <div class="grid grid-cols-3 text-center">
