@@ -9,7 +9,7 @@
     <div x-data="{ activeTab: 1 }" class="bg-[#fcfdfe] text-[#0a2540]">
         <section class="pt-32 pb-16 text-white" style="background: linear-gradient(135deg, rgba(10, 37, 64, 0.95) 0%, rgba(0, 112, 243, 0.9) 100%), url('{{ asset('assets/img/contact-page-title-bg.jpg') }}') center/cover no-repeat;">
             <div class="container max-w-7xl mx-auto px-4 text-center">
-                <span class="inline-block bg-[#0070f3] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">E-VOLT TECHNICAL TRAINING</span>
+                <span class="inline-block bg-[#0070f3] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">VOLTAFRIK TECHNICAL TRAINING</span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-white">Voltademy</h1>
                 <p class="text-lg md:text-xl text-gray-200 mb-6">Empowering the next generation of African innovators through high-impact technical skill acquisition.</p>
                 <nav class="flex justify-center">
@@ -81,7 +81,7 @@
                         <div class="relative z-10">
                             <div class="w-14 h-14 bg-[#eef6ff] text-[#0070f3] rounded-xl flex items-center justify-center text-2xl mb-5"><i class="bi bi-award"></i></div>
                             <h5 class="font-extrabold text-lg mb-2">Validation</h5>
-                            <p class="text-sm text-gray-600">Complete the capstone project to receive your industry-standard certification, validating your expertise within the E-VOLT network.</p>
+                            <p class="text-sm text-gray-600">Complete the capstone project to receive your industry-standard certification, validating your expertise within the Voltafrik network.</p>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                                 <i class="bi bi-check-circle-fill text-[#0070f3] mt-1"></i>
                                 <div>
                                     <h6 class="font-extrabold">Corporate Pipeline</h6>
-                                    <p class="text-sm text-gray-600">Top graduates gain priority access to internships and roles within the E-VOLT ecosystem.</p>
+                                    <p class="text-sm text-gray-600">Top graduates gain priority access to internships and roles within the Voltafrik ecosystem.</p>
                                 </div>
                             </div>
                         </div>
