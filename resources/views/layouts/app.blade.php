@@ -102,6 +102,55 @@
 </nav>
 
 <main>
+    <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)">
+        @if(session('success'))
+            <div class="fixed top-24 right-4 z-50 max-w-sm bg-green-50 border-l-4 border-green-500 rounded-lg shadow-lg p-4">
+                <div class="flex items-center">
+                    <i class="bi bi-check-circle-fill text-green-500 text-xl mr-3"></i>
+                    <p class="text-green-700 font-medium">{{ session('success') }}</p>
+                    <button @click="show = false" class="ml-auto text-green-500 hover:text-green-700">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="fixed top-24 right-4 z-50 max-w-sm bg-red-50 border-l-4 border-red-500 rounded-lg shadow-lg p-4">
+                <div class="flex items-center">
+                    <i class="bi bi-exclamation-circle-fill text-red-500 text-xl mr-3"></i>
+                    <p class="text-red-700 font-medium">{{ session('error') }}</p>
+                    <button @click="show = false" class="ml-auto text-red-500 hover:text-red-700">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            </div>
+        @endif
+
+        @if(session('warning'))
+            <div class="fixed top-24 right-4 z-50 max-w-sm bg-yellow-50 border-l-4 border-yellow-500 rounded-lg shadow-lg p-4">
+                <div class="flex items-center">
+                    <i class="bi bi-exclamation-triangle-fill text-yellow-500 text-xl mr-3"></i>
+                    <p class="text-yellow-700 font-medium">{{ session('warning') }}</p>
+                    <button @click="show = false" class="ml-auto text-yellow-500 hover:text-yellow-700">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            </div>
+        @endif
+
+        @if(session('info'))
+            <div class="fixed top-24 right-4 z-50 max-w-sm bg-blue-50 border-l-4 border-blue-500 rounded-lg shadow-lg p-4">
+                <div class="flex items-center">
+                    <i class="bi bi-info-circle-fill text-blue-500 text-xl mr-3"></i>
+                    <p class="text-blue-700 font-medium">{{ session('info') }}</p>
+                    <button @click="show = false" class="ml-auto text-blue-500 hover:text-blue-700">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            </div>
+        @endif
+    </div>
     @yield('body-content')
 </main>
 

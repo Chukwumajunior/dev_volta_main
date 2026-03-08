@@ -256,6 +256,10 @@
                                     <option value="guest">Guest</option>
                                 </select>
                             </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Password</label>
+                                <input type="text" name="password" x-model="newUser.password" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition" required>
+                            </div>
                             <button type="submit" class="w-full bg-[#0070f3] hover:bg-blue-700 text-white font-bold py-3 rounded-full transition mt-2">
                                 Add User
                             </button>

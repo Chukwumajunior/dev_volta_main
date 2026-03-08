@@ -24,7 +24,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
-            'tel' => 'required|string',
+            'phone' => 'required|string',
             'password' => 'required',
         ]);
 
@@ -45,7 +45,7 @@ class AuthController extends Controller
 
             return redirect()->route('profile.edit')->with('success', 'Welcome back, Admin.');
         }
-        
+
         return back()->with('error', 'Unauthorized credentials.');
     }
 
