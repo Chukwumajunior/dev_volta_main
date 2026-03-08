@@ -20,8 +20,8 @@
                     Custom websites and web applications for businesses in Nigeria.
                 </p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#contact" class="bg-[#f57813] hover:bg-white hover:text-[#0a2540] text-white px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1 shadow-lg">Start Your Project</a>
-                    <a href="#work" class="border-2 border-white text-white hover:bg-white hover:text-[#0a2540] px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1">View Our Work</a>
+                    <a href="/contact" class="bg-[#f57813] hover:bg-white hover:text-[#0a2540] text-white px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1 shadow-lg">Start Your Project</a>
+                    <a href="/projects" class="border-2 border-white text-white hover:bg-white hover:text-[#0a2540] px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1">View Our Work</a>
                 </div>
             </div>
         </section>
@@ -152,6 +152,73 @@
                 <p class="text-center text-sm text-gray-500 mt-6">*Custom projects quoted separately</p>
             </div>
         </section>
+
+        @php
+            $sectionPosts = $allPosts->where('category', 'section')->take(2);
+        @endphp
+
+        @if($sectionPosts->count() > 0)
+            <section class="py-24 bg-gradient-to-b from-white to-gray-50">
+                <div class="container max-w-7xl mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <span class="inline-block px-4 py-2 mb-4 text-sm font-semibold text-[#f57813] bg-[#f57813]/10 rounded-full">HIGHLIGHTED</span>
+                        <h2 class="text-4xl md:text-5xl font-bold text-[#0a2540]">Featured <span class="text-[#f57813]">Content</span></h2>
+                        <div class="w-24 h-1 bg-[#f57813] mx-auto mt-6 rounded-full"></div>
+                    </div>
+
+                    <div class="space-y-16">
+                        @foreach($sectionPosts as $index => $post)
+                            <div class="group">
+                                <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                                    <div class="relative {{ $index === 0 ? '' : 'md:order-2' }}">
+                                        <div class="rounded-2xl overflow-hidden shadow-xl relative z-10">
+                                            <img
+                                                src="{{ asset('storage/' . $post->image) }}"
+                                                class="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-105"
+                                                alt="{{ $post->title }}"
+                                            >
+                                        </div>
+                                        <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-[#f57813]/10 rounded-full blur-2xl"></div>
+                                        <div class="absolute -top-4 -left-4 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl"></div>
+                                    </div>
+
+                                    <div class="{{ $index === 0 ? '' : 'md:order-1' }}">
+                                        <div class="flex items-center gap-4 mb-4">
+                                    <span class="text-sm font-medium text-[#f57813] bg-[#f57813]/10 px-4 py-1.5 rounded-full">
+                                        {{ $post->created_at->format('M d, Y') }}
+                                    </span>
+                                            @if($post->price)
+                                                <span class="text-sm font-medium text-gray-600">
+                                            {{ to_amount($post->price) }}
+                                        </span>
+                                            @endif
+                                        </div>
+
+                                        <h3 class="text-3xl lg:text-4xl font-bold text-[#0a2540] mb-6 leading-tight">
+                                            {{ $post->title }}
+                                        </h3>
+
+                                        <div class="text-gray-600 text-lg leading-relaxed mb-8">
+                                            {!! Str::limit(strip_tags($post->body), 250) !!}
+                                        </div>
+
+                                        <a
+                                            href="{{ route('blog.show', $post->slug) }}"
+                                            class="inline-flex items-center gap-3 text-[#f57813] font-semibold text-lg group/link hover:text-[#0a2540] transition-all"
+                                        >
+                                            <span>Learn More</span>
+                                            <span class="w-10 h-10 rounded-full bg-[#f57813]/10 flex items-center justify-center group-hover/link:bg-[#f57813] group-hover/link:text-white transition-all">
+                                        <i class="bi bi-arrow-right"></i>
+                                    </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
 
         <!-- Tech Academy Section - Just Link -->
         <section class="py-16 bg-[#f57813]">
