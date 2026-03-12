@@ -80,15 +80,6 @@
                         </div>
 
                         <div>
-                            <label for="section" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Post Section</label>
-                            <select name="section" id="section" x-model="section" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition bg-white" required>
-                                <option value="development">Development</option>
-                                <option value="solar">Solar</option>
-                            </select>
-                            @error('section') <p class="text-red-500 text-xs mt-1 font-semibold">{{ $message }}</p> @enderror
-                        </div>
-
-                        <div>
                             <label for="type" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Post Type</label>
                             <select name="type" id="type" x-model="type" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition bg-white" required>
                                 <option value="info">Info</option>
@@ -132,7 +123,6 @@
                     title: post.title || '{{ old('title') }}',
                     body: post.body || '{{ old('body') }}',
                     category: post.category || '{{ old('category') }}',
-                    section: post.section || '{{ old('section') }}',
                     type: post.type || '{{ old('type', 'info') }}',
                     price: post.price || '{{ old('price') }}',
                     showPreview: false

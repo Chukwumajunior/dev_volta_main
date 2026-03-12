@@ -74,15 +74,6 @@
                         </div>
 
                         <div>
-                            <label for="section" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Post Section</label>
-                            <select name="section" id="section" x-model="section" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition bg-white" required>
-                                <option value="development">Development</option>
-                                <option value="solar">Solar</option>
-                            </select>
-                            @error('section') <p class="text-red-500 text-xs mt-1 font-semibold">{{ $message }}</p> @enderror
-                        </div>
-
-                        <div>
                             <label for="type" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Post Type</label>
                             <select name="type" id="type" x-model="type" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition bg-white" required>
                                 <option value="info">Info</option>
@@ -128,7 +119,6 @@
                     title: '{{ old('title') }}',
                     body: '{{ old('body') }}',
                     category: '{{ old('category') }}',
-                    section: '{{ old('section') }}',
                     type: '{{ old('type', 'info') }}',
                     price: '{{ old('price') }}',
                     showPreview: false

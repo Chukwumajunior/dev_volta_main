@@ -58,6 +58,8 @@ class PostController extends Controller
         $data['user_id'] = auth()->id();
         $data['username'] = auth()->user()->name;
 
+        $data['section'] = 'development';
+
         $post = Post::create($data);
 
         return redirect()->route('blog.show', $post->slug)->with('message', 'Blog post created successfully');
@@ -84,6 +86,9 @@ class PostController extends Controller
         }
 
         $data['slug'] = $this->generateSlug($data['title'], $post->id);
+
+        $data['section'] = 'development';
+
         $post->update($data);
 
         return redirect()->route('blog.show', $post->slug)->with('message', 'Post updated successfully');
@@ -104,7 +109,6 @@ class PostController extends Controller
             'body' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category' => 'required|string|max:255',
-            'section' => 'required|string|max:255',
             'type' => 'required|string|in:info,store',
             'price' => 'nullable|required_if:type,store|numeric|min:0',
         ]);
