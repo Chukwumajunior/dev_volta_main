@@ -34,7 +34,7 @@
                 <a href="{{ route('about') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">About</a>
                 <a href="{{ route('careers') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Tech Academy</a>
                 <a href="{{ route('projects') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Projects</a>
-                <a href="{{ route('blog.stores') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Market</a>
+                <a href="{{ route('blog.stores') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Sales</a>
                 <a href="{{ route('contact') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Contact</a>
             </div>
             @auth
@@ -76,7 +76,7 @@
             <a href="{{ route('about') }}" class="py-2 font-semibold hover:text-[#f57813] transition">About</a>
             <a href="{{ route('careers') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Tech Academy</a>
             <a href="{{ route('projects') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Projects</a>
-            <a href="{{ route('blog.stores') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Market</a>
+            <a href="{{ route('blog.stores') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Sales</a>
             <a href="{{ route('contact') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Contact</a>
             <hr class="my-2">
             @auth
