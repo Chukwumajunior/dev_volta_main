@@ -72,9 +72,10 @@ class PostController extends Controller
         $data['user_id'] = auth()->id();
         $data['username'] = auth()->user()->name;
 
-        Post::create($data);
+        $post = Post::create($data);
 
-        return redirect()->back()->with('message', 'Blog post created successfully');
+        return redirect()->route('posts.show', $post->slug)
+            ->with('message', 'Blog post created successfully');
     }
 
 
@@ -110,7 +111,8 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect()->back()->with('message', 'Post updated successfully');
+        return redirect()->route('posts.show', $post->slug)
+            ->with('message', 'Post updated successfully');
     }
 
     public function destroy(Post $post)
