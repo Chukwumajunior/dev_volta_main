@@ -159,6 +159,7 @@
                                 <th class="px-5 py-3 text-left">Title</th>
                                 <th class="px-5 py-3 text-left">Type</th>
                                 <th class="px-5 py-3 text-left">Category</th>
+                                <th class="px-5 py-3 text-left">Section</th>
                                 <th class="px-5 py-3 text-left">Date</th>
                                 <th class="px-5 py-3 text-right">Actions</th>
                             </tr>
@@ -174,6 +175,7 @@
                                     </td>
                                     <td class="px-5 py-3 text-xs">{{ ucfirst($post->type) }}</td>
                                     <td class="px-5 py-3 text-xs">{{ ucfirst($post->category) }}</td>
+                                    <td class="px-5 py-3 text-xs">{{ ucfirst($post->section) }}</td>
                                     <td class="px-5 py-3 text-xs text-gray-500">{{ $post->created_at->format('d M, Y') }}</td>
                                     <td class="px-5 py-3 text-right">
                                         <a href="{{ route('blog.edit', $post->id) }}" class="text-yellow-600 hover:text-yellow-800 mr-3">
