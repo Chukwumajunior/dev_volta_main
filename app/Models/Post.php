@@ -21,7 +21,7 @@ class Post extends Model
     }
     protected static function booted()
     {
-        static::addGlobalScope('solar', function (Builder $builder) {
+        static::addGlobalScope('development', function (Builder $builder) {
             $builder->where('section', 'development');
         });
     }
