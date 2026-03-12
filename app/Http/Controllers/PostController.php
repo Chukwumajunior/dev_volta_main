@@ -74,7 +74,7 @@ class PostController extends Controller
 
         $post = Post::create($data);
 
-        return redirect()->route('posts.show', $post->slug)
+        return redirect()->route('blog.show', $post->slug)
             ->with('message', 'Blog post created successfully');
     }
 
@@ -111,7 +111,7 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect()->route('posts.show', $post->slug)
+        return redirect()->route('blog.show', $post->slug)
             ->with('message', 'Post updated successfully');
     }
 
