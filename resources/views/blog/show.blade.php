@@ -19,16 +19,10 @@
                             <li><a href="/" class="text-gray-600 hover:text-[#0070f3] transition">Home</a></li>
                             <li class="text-gray-400">/</li>
                         @endif
-
-                        <li class="text-[#0a2540] font-semibold truncate">
-                            {{ $post->title ?? 'Post' }}
-                        </li>
-
+                        <li class="text-[#0a2540] font-semibold truncate">{{ $post->title ?? 'Post' }}</li>
                         @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isWriter()))
                             <li class="text-gray-400">/</li>
-                            <li>
-                                <a href="{{ route('blog.create') }}" class="text-gray-600 hover:text-[#0070f3] transition">Create New Post</a>
-                            </li>
+                            <li><a href="{{ route('blog.create') }}" class="text-gray-600 hover:text-[#0070f3] transition">Create New Post</a></li>
                         @endif
                     </ol>
                 </nav>
@@ -37,28 +31,28 @@
         </section>
 
         <div class="container max-w-7xl mx-auto px-4 py-12">
-            <div class="grid lg:grid-cols-12 gap-8">
-                <div class="lg:col-span-7">
-                    <div class="bg-white rounded-3xl p-4 shadow-lg border border-[rgba(0,112,243,0.1)]" data-aos="fade-right">
-                        <img src="{{ asset('storage/' . $post->image) }}" class="w-full h-[500px] object-cover rounded-2xl" alt="{{ $post->title }}">
-                    </div>
+            <div class="lg:flex lg:gap-8">
+
+                <div class="lg:w-1/2 flex-shrink-0 mb-8 lg:mb-0">
+                    <img src="{{ asset('storage/' . $post->image) }}" class="w-full object-cover rounded-2xl" alt="{{ $post->title }}">
                 </div>
 
-                <div class="lg:col-span-5 flex flex-col justify-center">
+                <div class="lg:w-1/2 prose prose-lg text-gray-600 leading-relaxed">
+
                     @if($post->type === 'store')
-                        <span class="text-[#0070f3] font-extrabold text-xs uppercase tracking-wider mb-2">Featured Store Item</span>
+                        <span class="text-[#0070f3] font-extrabold text-xs uppercase tracking-wider mb-2 inline-block">Featured Store Item</span>
                         <h2 class="text-3xl md:text-4xl font-black mb-4">{{ $post->title }}</h2>
 
                         <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-semibold text-gray-600 inline-flex items-center">
+                            <i class="bi bi-tag text-[#0070f3] mr-2"></i> Available Now
+                        </span>
                             <span class="bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-semibold text-gray-600 inline-flex items-center">
-                                <i class="bi bi-tag text-[#0070f3] mr-2"></i> Available Now
-                            </span>
+                            <i class="bi bi-box text-[#0070f3] mr-2"></i> In Stock
+                        </span>
                             <span class="bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-semibold text-gray-600 inline-flex items-center">
-                                <i class="bi bi-box text-[#0070f3] mr-2"></i> In Stock
-                            </span>
-                            <span class="bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-semibold text-gray-600 inline-flex items-center">
-                                <i class="bi bi-shield-check text-[#0070f3] mr-2"></i> Quality Assured
-                            </span>
+                            <i class="bi bi-shield-check text-[#0070f3] mr-2"></i> Quality Assured
+                        </span>
                         </div>
 
                         <h3 class="text-2xl text-[#0070f3] font-bold mb-5">{{ to_amount($post->price) }}</h3>
@@ -83,11 +77,9 @@
                         <a href="tel:09034152070" class="bg-[#0070f3] hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-xl inline-flex items-center justify-center max-w-xs">
                             <i class="bi bi-telephone mr-2"></i> Inquire Now
                         </a>
-                    @else
-                        <h2 class="text-3xl md:text-4xl font-black mb-5">{{ $post->title }}</h2>
                     @endif
 
-                    <div class="mt-6 prose prose-lg max-w-none text-gray-600 leading-relaxed">
+                    <div class="mt-6">
                         {!! $post->body !!}
                     </div>
 
