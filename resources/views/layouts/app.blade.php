@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logo5.png') }}">
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="google-site-verification" content="TMjY9SBbb8mbeW8MKfZC1L5IEF6yyNdhPHTOwdHmG3k" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
