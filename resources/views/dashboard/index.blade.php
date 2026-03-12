@@ -254,6 +254,7 @@
                                 <select name="role" x-model="newUser.role" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-blue-100 outline-none transition bg-white" required>
                                     <option value="writer">Writer</option>
                                     <option value="guest">Guest</option>
+                                    <option value="writer">Admin</option>
                                 </select>
                             </div>
                             <div>

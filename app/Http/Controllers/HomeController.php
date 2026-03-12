@@ -20,7 +20,9 @@ class HomeController extends Controller
 
     public function update_feed(Request $request)
     {
-        $query = Post::whereNotIn('category', ['Team', 'Reviews'])->latest();
+        $query = Post::whereNotIn('category', ['Team', 'Reviews'])
+            ->where('type', 'info')
+            ->latest();
 
         if ($request->has('category') && $request->category) {
             $query->where('category', $request->category);

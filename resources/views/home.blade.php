@@ -116,30 +116,30 @@
                 <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     <div class="bg-white rounded-2xl border border-gray-200 p-8 hover:shadow-xl transition-all">
                         <h3 class="text-2xl font-bold mb-2">Basic</h3>
-                        <div class="text-4xl font-bold text-[#f57813] mb-4">₦500k<span class="text-base text-gray-500 font-normal">+</span></div>
+                        <div class="text-3xl font-bold text-[#f57813] mb-4">₦300k - ₦800k<span class="text-base text-gray-500 font-normal">+</span></div>
                         <ul class="space-y-3 mb-8 text-gray-600">
-                            <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> 5-page website</li>
                             <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Mobile responsive</li>
                             <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Contact form</li>
                             <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Basic SEO</li>
+                            <li class="flex items-center gap-2"><i class="bi bi-x-circle-fill text-grey-500"></i> Admin dashboard</li>
                         </ul>
                         <a href="/contact" class="block w-full text-center border-2 border-[#0a2540] text-[#0a2540] hover:bg-[#0a2540] hover:text-white font-semibold py-3 rounded-full transition-all">Get Quote</a>
                     </div>
                     <div class="bg-white rounded-2xl border-2 border-[#f57813] p-8 shadow-xl relative">
                         <div class="absolute -top-3 right-4 bg-[#f57813] text-white text-xs px-3 py-1 rounded-full">POPULAR</div>
                         <h3 class="text-2xl font-bold mb-2">Business</h3>
-                        <div class="text-4xl font-bold text-[#f57813] mb-4">₦1.2M<span class="text-base text-gray-500 font-normal">+</span></div>
+                        <div class="text-3xl font-bold text-[#f57813] mb-4">₦1.2M - ₦1.7M<span class="text-base text-gray-500 font-normal">+</span></div>
                         <ul class="space-y-3 mb-8 text-gray-600">
-                            <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> 10-15 page website</li>
                             <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> CMS integration</li>
                             <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Blog/News section</li>
                             <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Advanced SEO</li>
+                            <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Admin dashboard</li>
                         </ul>
                         <a href="/contact" class="block w-full text-center bg-[#f57813] hover:bg-[#0a2540] text-white font-semibold py-3 rounded-full transition-all">Get Quote</a>
                     </div>
                     <div class="bg-white rounded-2xl border border-gray-200 p-8 hover:shadow-xl transition-all">
                         <h3 class="text-2xl font-bold mb-2">E-commerce</h3>
-                        <div class="text-4xl font-bold text-[#f57813] mb-4">₦2.5M<span class="text-base text-gray-500 font-normal">+</span></div>
+                        <div class="text-3xl font-bold text-[#f57813] mb-4">₦2.2M<span class="text-base text-gray-500 font-normal">+</span></div>
                         <ul class="space-y-3 mb-8 text-gray-600">
                             <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Online store</li>
                             <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Payment integration</li>
@@ -240,7 +240,7 @@
                         <span class="text-[#f57813] font-mono text-sm mb-2 block">&lt;latest&gt;</span>
                         <h2 class="text-4xl md:text-5xl font-bold text-[#0a2540]">News & <span class="text-[#f57813]">Updates</span></h2>
                     </div>
-                    <a href="{{ route('blog.stores') }}" class="text-[#f57813] font-semibold hover:underline">View all →</a>
+                    <a href="{{ route('updates') }}" class="text-[#f57813] font-semibold hover:underline">View all →</a>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-6">
@@ -254,6 +254,45 @@
                                 <h3 class="font-bold text-xl mb-3">{{ $post->title }}</h3>
                                 <p class="text-gray-600 text-sm mb-4">{{ Str::limit(strip_tags($post->body), 100) }}</p>
                                 <a href="{{ route('blog.show', $post->slug) }}" class="text-[#f57813] font-semibold hover:underline">Read more →</a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50">
+            <div class="container max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <span class="text-[#f57813] font-mono text-sm mb-2 block">&lt;testimonials&gt;</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-[#0a2540]">What Our <span class="text-[#f57813]">Clients Say</span></h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Real feedback from the schools and administrators using our platform every day.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach($reviews as $post)
+                        <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col h-full">
+
+                            <div class="flex text-[#f57813] mb-4">
+                                @for($i = 0; $i < 5; $i++)
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                @endfor
+                            </div>
+
+                            <blockquote class="flex-grow">
+                                <p class="text-gray-700 italic leading-relaxed mb-6">
+                                    "{{ Str::limit(strip_tags($post->body), 150) }}"
+                                </p>
+                            </blockquote>
+
+                            <div class="flex items-center mt-6 pt-6 border-t border-gray-50">
+                                <img src="{{ asset('storage/' . $post->image) }}"
+                                     class="w-12 h-12 rounded-full object-cover border-2 border-[#f57813]/20"
+                                     alt="{{ $post->title }}">
+                                <div class="ml-4">
+                                    <h4 class="text-sm font-bold text-[#0a2540]">{{ $post->title }}</h4>
+                                    <p class="text-xs text-gray-500">Verified Client</p>
+                                </div>
                             </div>
                         </div>
                     @endforeach
