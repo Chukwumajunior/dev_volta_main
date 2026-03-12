@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $allPosts = Post::where('section', 'development')->get();
-            $updates = $allPosts->whereNotIn('category', ['Team', 'Reviews']);
+            $updates = $allPosts->whereNotIn('category', ['team', 'reviews']);
             $teamMembers = $allPosts->where('category', 'team');
             $storePosts = $allPosts->where('type', 'store')
                 ->merge($allPosts->where('category', 'updates'))

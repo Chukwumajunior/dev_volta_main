@@ -12,24 +12,22 @@ class User extends Authenticatable
 
     protected $fillable = ['name', 'email', 'phone', 'role', 'password'];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $casts = ['email_verified_at' => 'datetime'];
 
-    // Check if the user is an admin
     public function isAdmin()
     {
         return $this->role === 'admin';
     }
 
-    // In User.php model
-    public function careerApplication()
+    public function isWriter()
+    {
+        return $this->role === 'writer';
+    }
+
+    public function careerApplications()
     {
         return $this->hasMany(CareerApplication::class);
     }
 }
-

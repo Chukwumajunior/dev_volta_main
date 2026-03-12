@@ -12,14 +12,24 @@
             <div class="container max-w-7xl mx-auto px-4">
                 <nav class="mb-4">
                     <ol class="flex items-center space-x-2 text-sm">
-                        @if($post->type === 'store')
+                        @if(isset($post) && $post->type === 'store')
                             <li><a href="{{ route('blog.stores') }}" class="text-gray-600 hover:text-[#0070f3] transition">Stores</a></li>
                             <li class="text-gray-400">/</li>
                         @else
                             <li><a href="/" class="text-gray-600 hover:text-[#0070f3] transition">Home</a></li>
                             <li class="text-gray-400">/</li>
                         @endif
-                        <li class="text-[#0a2540] font-semibold truncate">{{ $post->title }}</li>
+
+                        <li class="text-[#0a2540] font-semibold truncate">
+                            {{ $post->title ?? 'Post' }}
+                        </li>
+
+                        @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isWriter()))
+                            <li class="text-gray-400">/</li>
+                            <li>
+                                <a href="{{ route('blog.create') }}" class="text-gray-600 hover:text-[#0070f3] transition">Create New Post</a>
+                            </li>
+                        @endif
                     </ol>
                 </nav>
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-black">{{ $post->title }}</h1>
