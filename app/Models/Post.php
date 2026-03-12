@@ -15,6 +15,10 @@ class Post extends Model
         'price', 'meta_title', 'meta_description', 'meta_keywords', 'slug', 'username',
     ];
 
+    protected $attributes = [
+        'section' => 'development',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
