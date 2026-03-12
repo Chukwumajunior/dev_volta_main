@@ -182,8 +182,7 @@
                                 <img src="{{ asset('storage/' . $member->image) }}" class="w-full h-full rounded-full object-cover border-4 border-[#f57813]/20" alt="{{ $member->title }}">
                             </div>
                             <h4 class="font-bold text-lg">{{ $member->title }}</h4>
-                            <p class="text-[#f57813] font-semibold text-sm mb-2">{{ $member->position ?? 'Technical Expert' }}</p>
-                            <p class="text-sm text-gray-600">{{ $member->expertise ?? 'Full Stack Developer' }}</p>
+                            <p class="text-[#f57813] font-semibold text-sm mb-2">{{ $member->body }} </p>
                         </div>
                     @endforeach
                 </div>
