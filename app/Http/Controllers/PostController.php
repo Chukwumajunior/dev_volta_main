@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+
     public function create()
     {
         return view('blog.create');
@@ -16,19 +17,23 @@ class PostController extends Controller
 
     public function index()
     {
-        $products = Post::where('type', 'store')->latest()->paginate(12);
+        $products = Post::where('type', 'store')
+                        ->latest()
+                        ->paginate(12);
+
         return view('blog.stores', compact('products'));
     }
+
 
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
 
         $relatedPosts = Post::where('category', $post->category)
-            ->where('id', '!=', $post->id)
-            ->latest()
-            ->limit(4)
-            ->get();
+                        ->where('id', '!=', $post->id)
+                        ->latest()
+                        ->limit(4)
+                        ->get();
 
         return view('blog.show', compact('post', 'relatedPosts'));
     }
@@ -36,12 +41,15 @@ class PostController extends Controller
     public function store_filter(Request $request)
     {
         $search = $request->input('search');
-
-        $products = Post::when($search, fn($q) => $q->where('title', 'like', "%{$search}%"))
+        $products = Post::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('title', 'like', "%{$search}%");
+            })
             ->paginate(9);
 
         return view('blog.stores', compact('products'));
     }
+
 
     public function store(Request $request)
     {
@@ -51,25 +59,24 @@ class PostController extends Controller
             $data['image'] = $request->file('image')->store('images', 'public');
         }
 
-        $data['slug'] = $this->generateSlug($data['title']);
+        $slug = Str::slug($data['title']);
+        $count = Post::where('slug', 'like', "$slug%")->count();
+        if ($count > 0) {
+            $slug .= '-' . ($count + 1);
+        }
+        $data['slug'] = $slug;
+
         $data['meta_title'] = $data['meta_title'] ?? $data['title'];
         $data['meta_description'] = $data['meta_description'] ?? Str::limit(strip_tags($data['body']), 150);
         $data['meta_keywords'] = $data['meta_keywords'] ?? implode(', ', array_slice(explode(' ', $data['title']), 0, 10));
         $data['user_id'] = auth()->id();
         $data['username'] = auth()->user()->name;
 
-        $data['section'] = 'development';
+        Post::create($data);
 
-        $post = Post::create($data);
-
-        return redirect()->route('blog.show', $post->slug)->with('message', 'Blog post created successfully');
+        return redirect()->back()->with('message', 'Blog post created successfully');
     }
 
-    public function blog()
-    {
-        $posts = Post::where('category', 'Updates')->latest()->paginate(9);
-        return view('blog.index', compact('posts'));
-    }
 
     public function edit(Post $post)
     {
@@ -81,22 +88,37 @@ class PostController extends Controller
         $data = $this->validatePost($request);
 
         if ($request->hasFile('image')) {
-            if ($post->image) Storage::disk('public')->delete($post->image);
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
             $data['image'] = $request->file('image')->store('images', 'public');
         }
 
-        $data['slug'] = $this->generateSlug($data['title'], $post->id);
+        $slug = Str::slug($data['title']);
+        $originalSlug = $slug;
+        $count = 1;
 
-        $data['section'] = 'development';
+        while (
+        Post::where('slug', $slug)
+            ->where('id', '!=', $post->id)
+            ->exists()
+        ) {
+            $slug = $originalSlug . '-' . $count++;
+        }
+
+        $data['slug'] = $slug;
 
         $post->update($data);
 
-        return redirect()->route('blog.show', $post->slug)->with('message', 'Post updated successfully');
+        return redirect()->back()->with('message', 'Post updated successfully');
     }
 
     public function destroy(Post $post)
     {
-        if ($post->image) Storage::disk('public')->delete($post->image);
+        if ($post->image) {
+            Storage::disk('public')->delete($post->image);
+        }
+
         $post->delete();
 
         return redirect()->back()->with('message', 'Post deleted successfully.');
@@ -112,21 +134,5 @@ class PostController extends Controller
             'type' => 'required|string|in:info,store',
             'price' => 'nullable|required_if:type,store|numeric|min:0',
         ]);
-    }
-
-    private function generateSlug(string $title, ?int $ignoreId = null): string
-    {
-        $slug = Str::slug($title);
-        $originalSlug = $slug;
-        $count = 1;
-
-        while (Post::where('slug', $slug)
-            ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
-            ->exists()
-        ) {
-            $slug = $originalSlug . '-' . $count++;
-        }
-
-        return $slug;
     }
 }
