@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $allPosts = Post::where('section', 'development')->get();
-
+            $updates = $allPosts->whereNotIn('category', ['Team', 'Reviews'])->latest();
             $teamMembers = $allPosts->where('category', 'team');
             $storePosts = $allPosts->where('type', 'store')
                 ->merge($allPosts->where('category', 'updates'))
@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             $projects = $allPosts->where('category', 'projects')->sortByDesc('created_at');
             $partnerships = $allPosts->where('category', 'partnerships')->sortByDesc('created_at');
 
-            $view->with(compact('teamMembers', 'storePosts', 'allPosts', 'reviews', 'projects', 'sections', 'partnerships'));
+            $view->with(compact('teamMembers', 'storePosts', 'allPosts', 'updates', 'reviews', 'projects', 'sections', 'partnerships'));
         });
 
     }

@@ -244,7 +244,7 @@
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-6">
-                    @foreach($allPosts->take(3) as $post)
+                    @foreach($updates->take(3) as $post)
                         <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all">
                             <div class="h-48 bg-gray-100">
                                 <img src="{{ asset('storage/' . $post->image) }}" class="w-full h-full object-cover" alt="{{ $post->title }}">
