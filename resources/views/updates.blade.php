@@ -32,7 +32,7 @@
                         <div class="flex flex-col md:flex-row gap-3 bg-white p-3 rounded-2xl shadow-sm border border-gray-200">
                             <div class="flex-grow flex items-center gap-3 px-3">
                                 <label class="text-sm font-semibold text-gray-700 whitespace-nowrap">Filter by Category:</label>
-                                <select name="category" x-model="category" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#f57813] focus:border-transparent">
+                                <select name="category" x-model="category" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0070f3] focus:border-transparent">
                                     <option value="">All Categories</option>
                                     <option value="Updates">Updates</option>
                                     <option value="Renewable Energy">Renewable Energy</option>
@@ -40,7 +40,7 @@
                                     <option value="Projects">Projects</option>
                                 </select>
                             </div>
-                            <button type="submit" class="bg-[#f57813] hover:bg-[#e06b0c] text-white font-semibold px-6 py-2 rounded-xl transition whitespace-nowrap">Apply Filter</button>
+                            <button type="submit" class="bg-[#0070f3] hover:bg-[#e06b0c] text-white font-semibold px-6 py-2 rounded-xl transition whitespace-nowrap">Apply Filter</button>
                         </div>
                     </form>
                 </div>
@@ -52,9 +52,9 @@
                                 <img src="{{ asset('storage/' . $update->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="{{ $update->title }}">
                             </div>
                             <div class="p-5 flex flex-col h-[calc(100%-14rem)]">
-                                <h5 class="font-bold text-xl mb-2 group-hover:text-[#f57813] transition">{{ $update->title }}</h5>
+                                <h5 class="font-bold text-xl mb-2 group-hover:text-[#0070f3] transition">{{ $update->title }}</h5>
                                 <p class="text-sm text-gray-600 mb-4 flex-grow">{{ Str::limit($update->excerpt, 100) }}</p>
-                                <a href="{{ route('blog.show', $update->slug) }}" class="inline-flex items-center text-[#f57813] font-semibold hover:gap-2 transition-all">
+                                <a href="{{ route('blog.show', $update->slug) }}" class="inline-flex items-center text-[#0070f3] font-semibold hover:gap-2 transition-all">
                                     Read More <i class="bi bi-arrow-right ml-1"></i>
                                 </a>
                             </div>

@@ -29,7 +29,7 @@
                     <div class="space-y-8">
                         <div class="border-b border-gray-200 pb-6" @mouseenter="activeSection = 1" @mouseleave="activeSection = null">
                             <h4 class="text-xl font-bold text-[#0a2540] mb-3 flex items-center">
-                                <span class="w-8 h-8 bg-[#f57813] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">1</span>
+                                <span class="w-8 h-8 bg-[#0070f3] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">1</span>
                                 Information We Collect
                             </h4>
                             <p class="text-gray-600 ml-11">We collect personal details like your name, email address, and other contact information when you register, enroll in a course, or contact us.</p>
@@ -37,7 +37,7 @@
 
                         <div class="border-b border-gray-200 pb-6" @mouseenter="activeSection = 2" @mouseleave="activeSection = null">
                             <h4 class="text-xl font-bold text-[#0a2540] mb-3 flex items-center">
-                                <span class="w-8 h-8 bg-[#f57813] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">2</span>
+                                <span class="w-8 h-8 bg-[#0070f3] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">2</span>
                                 How We Use Your Data
                             </h4>
                             <ul class="list-disc ml-11 text-gray-600 space-y-2">
@@ -50,7 +50,7 @@
 
                         <div class="border-b border-gray-200 pb-6" @mouseenter="activeSection = 3" @mouseleave="activeSection = null">
                             <h4 class="text-xl font-bold text-[#0a2540] mb-3 flex items-center">
-                                <span class="w-8 h-8 bg-[#f57813] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">3</span>
+                                <span class="w-8 h-8 bg-[#0070f3] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">3</span>
                                 Student Accounts
                             </h4>
                             <p class="text-gray-600 ml-11">Once you register for any of our courses, a student account is automatically created for you. This helps us track your learning journey and ensures we can reach out when necessary.</p>
@@ -58,7 +58,7 @@
 
                         <div class="border-b border-gray-200 pb-6" @mouseenter="activeSection = 4" @mouseleave="activeSection = null">
                             <h4 class="text-xl font-bold text-[#0a2540] mb-3 flex items-center">
-                                <span class="w-8 h-8 bg-[#f57813] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">4</span>
+                                <span class="w-8 h-8 bg-[#0070f3] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">4</span>
                                 Data Security
                             </h4>
                             <p class="text-gray-600 ml-11">We employ industry-standard practices to keep your data safe and secure. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute protection.</p>
@@ -66,7 +66,7 @@
 
                         <div class="border-b border-gray-200 pb-6" @mouseenter="activeSection = 5" @mouseleave="activeSection = null">
                             <h4 class="text-xl font-bold text-[#0a2540] mb-3 flex items-center">
-                                <span class="w-8 h-8 bg-[#f57813] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">5</span>
+                                <span class="w-8 h-8 bg-[#0070f3] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">5</span>
                                 Sharing Information
                             </h4>
                             <p class="text-gray-600 ml-11">We do not sell or share your personal data with third parties, except as required by law or to provide core services like payments or email communications.</p>
@@ -74,7 +74,7 @@
 
                         <div class="border-b border-gray-200 pb-6" @mouseenter="activeSection = 6" @mouseleave="activeSection = null">
                             <h4 class="text-xl font-bold text-[#0a2540] mb-3 flex items-center">
-                                <span class="w-8 h-8 bg-[#f57813] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">6</span>
+                                <span class="w-8 h-8 bg-[#0070f3] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">6</span>
                                 Your Rights
                             </h4>
                             <p class="text-gray-600 ml-11">You have the right to access, correct, or delete your personal data. You may also opt out of communications at any time.</p>
@@ -82,7 +82,7 @@
 
                         <div class="border-b border-gray-200 pb-6" @mouseenter="activeSection = 7" @mouseleave="activeSection = null">
                             <h4 class="text-xl font-bold text-[#0a2540] mb-3 flex items-center">
-                                <span class="w-8 h-8 bg-[#f57813] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">7</span>
+                                <span class="w-8 h-8 bg-[#0070f3] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">7</span>
                                 Policy Updates
                             </h4>
                             <p class="text-gray-600 ml-11">This policy may be updated occasionally. We encourage you to review it from time to time.</p>
@@ -90,10 +90,10 @@
 
                         <div @mouseenter="activeSection = 8" @mouseleave="activeSection = null">
                             <h4 class="text-xl font-bold text-[#0a2540] mb-3 flex items-center">
-                                <span class="w-8 h-8 bg-[#f57813] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">8</span>
+                                <span class="w-8 h-8 bg-[#0070f3] text-white rounded-full inline-flex items-center justify-center text-sm mr-3">8</span>
                                 Contact Us
                             </h4>
-                            <p class="text-gray-600 ml-11">If you have any questions regarding our Privacy Policy, feel free to reach out to us at <a href="mailto:info@voltafrik.com.ng" class="text-[#f57813] font-bold hover:underline">info@voltafrik.com.ng</a>.</p>
+                            <p class="text-gray-600 ml-11">If you have any questions regarding our Privacy Policy, feel free to reach out to us at <a href="mailto:info@voltafrik.com.ng" class="text-[#0070f3] font-bold hover:underline">info@voltafrik.com.ng</a>.</p>
                         </div>
                     </div>
                 </div>

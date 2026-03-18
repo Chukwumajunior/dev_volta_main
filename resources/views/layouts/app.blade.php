@@ -6,7 +6,7 @@
     <title>@yield('title', 'Voltafrik | Web Development & Tech Training')</title>
     <meta name="description" content="@yield('meta_description', 'Voltafrik - Web development company and tech training provider in Nigeria.')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logo5.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/dark_logo_full2.png') }}">
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="google-site-verification" content="TMjY9SBbb8mbeW8MKfZC1L5IEF6yyNdhPHTOwdHmG3k" />
@@ -23,7 +23,7 @@
 <nav class="fixed top-0 w-full z-50 py-4 transition-all duration-300" :class="{ 'backdrop-blur-md bg-white/80 border-b border-black/5': true }">
     <div class="container max-w-7xl mx-auto px-4 flex items-center justify-between">
         <a href="/" class="flex items-center gap-2">
-            <img src="{{ asset('assets/img/logo5.png') }}" alt="Voltafrik" class="h-10 w-auto">
+            <img src="{{ asset('assets/img/logo/dark_logo_full2.png') }}" alt="Voltafrik" class="h-10 w-auto">
             <span class="font-extrabold text-2xl tracking-tighter">VOLTAFRIK</span>
         </a>
         <button class="lg:hidden text-2xl" @click="mobileMenuOpen = !mobileMenuOpen">
@@ -31,19 +31,19 @@
         </button>
         <div class="hidden lg:flex items-center gap-1">
             <div class="flex items-center">
-                <a href="/" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Home</a>
-                <a href="{{ route('about') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">About</a>
-                <a href="{{ route('careers') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Tech Academy</a>
-                <a href="{{ route('projects') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Projects</a>
-                <a href="{{ route('blog.stores') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Sales</a>
-                <a href="{{ route('contact') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#f57813] transition">Contact</a>
+                <a href="/" class="nav-link px-4 py-2 font-semibold hover:text-[#0070f3] transition">Home</a>
+                <a href="{{ route('about') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#0070f3] transition">About</a>
+                <a href="{{ route('careers') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#0070f3] transition">Tech Academy</a>
+                <a href="{{ route('projects') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#0070f3] transition">Projects</a>
+                <a href="{{ route('blog.stores') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#0070f3] transition">Sales</a>
+                <a href="{{ route('contact') }}" class="nav-link px-4 py-2 font-semibold hover:text-[#0070f3] transition">Contact</a>
             </div>
             @auth
                 <div class="relative ml-3" x-data="{ accountDropdown: false }">
                     <button
                         @mouseenter="accountDropdown = true"
                         @mouseleave="accountDropdown = false"
-                        class="bg-[#0a2540] hover:bg-[#f57813] text-white font-bold py-3 px-7 rounded-full transition-all hover:-translate-y-1 flex items-center gap-2"
+                        class="bg-[#0a2540] hover:bg-[#0070f3] text-white font-bold py-3 px-7 rounded-full transition-all hover:-translate-y-1 flex items-center gap-2"
                     >
                         Account <i class="bi bi-chevron-down" :class="{ 'rotate-180': accountDropdown }"></i>
                     </button>
@@ -66,37 +66,37 @@
                     </div>
                 </div>
             @else
-                <a href="/login" class="bg-[#0a2540] hover:bg-[#f57813] text-white font-bold py-3 px-7 rounded-full transition-all hover:-translate-y-1 ml-3">Get Started</a>
+                <a href="/login" class="bg-[#0a2540] hover:bg-[#0070f3] text-white font-bold py-3 px-7 rounded-full transition-all hover:-translate-y-1 ml-3">Get Started</a>
             @endauth
         </div>
     </div>
 
     <div x-show="mobileMenuOpen" x-cloak @click.away="mobileMenuOpen = false" class="lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-t border-black/5 p-5">
         <div class="flex flex-col gap-3">
-            <a href="/" class="py-2 font-semibold hover:text-[#f57813] transition">Home</a>
-            <a href="{{ route('about') }}" class="py-2 font-semibold hover:text-[#f57813] transition">About</a>
-            <a href="{{ route('careers') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Tech Academy</a>
-            <a href="{{ route('projects') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Projects</a>
-            <a href="{{ route('blog.stores') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Sales</a>
-            <a href="{{ route('contact') }}" class="py-2 font-semibold hover:text-[#f57813] transition">Contact</a>
+            <a href="/" class="py-2 font-semibold hover:text-[#0070f3] transition">Home</a>
+            <a href="{{ route('about') }}" class="py-2 font-semibold hover:text-[#0070f3] transition">About</a>
+            <a href="{{ route('careers') }}" class="py-2 font-semibold hover:text-[#0070f3] transition">Tech Academy</a>
+            <a href="{{ route('projects') }}" class="py-2 font-semibold hover:text-[#0070f3] transition">Projects</a>
+            <a href="{{ route('blog.stores') }}" class="py-2 font-semibold hover:text-[#0070f3] transition">Sales</a>
+            <a href="{{ route('contact') }}" class="py-2 font-semibold hover:text-[#0070f3] transition">Contact</a>
             <hr class="my-2">
             @auth
                 <div x-data="{ open: false }">
-                    <button @click="open = !open" class="w-full text-left py-2 font-semibold hover:text-[#f57813] transition flex items-center justify-between">
+                    <button @click="open = !open" class="w-full text-left py-2 font-semibold hover:text-[#0070f3] transition flex items-center justify-between">
                         Account <i class="bi" :class="open ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
                     </button>
                     <div x-show="open" x-cloak class="pl-4 flex flex-col gap-2 mt-1">
-                        <a href="{{ auth()->user()->role === 'admin' ? route('dashboard') : route('student.dashboard') }}" class="py-1 hover:text-[#f57813] transition"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
-                        <a href="{{ route('profile.edit') }}" class="py-1 hover:text-[#f57813] transition"><i class="bi bi-person me-2"></i> Profile</a>
+                        <a href="{{ auth()->user()->role === 'admin' ? route('dashboard') : route('student.dashboard') }}" class="py-1 hover:text-[#0070f3] transition"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
+                        <a href="{{ route('profile.edit') }}" class="py-1 hover:text-[#0070f3] transition"><i class="bi bi-person me-2"></i> Profile</a>
                         <hr>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="w-full text-left py-1 text-red-600 hover:text-[#f57813] transition"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button>
+                            <button type="submit" class="w-full text-left py-1 text-red-600 hover:text-[#0070f3] transition"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button>
                         </form>
                     </div>
                 </div>
             @else
-                <a href="/login" class="bg-[#0a2540] text-white font-bold py-3 px-7 rounded-full text-center hover:bg-[#f57813] transition-all">Get Started</a>
+                <a href="/login" class="bg-[#0a2540] text-white font-bold py-3 px-7 rounded-full text-center hover:bg-[#0070f3] transition-all">Get Started</a>
             @endauth
         </div>
     </div>
@@ -183,10 +183,10 @@
                     <a href="mailto:info@voltafrik.com.ng" class="hover:text-white transition block"><i class="bi bi-envelope me-2"></i> info@voltafrik.com.ng</a>
                 </div>
                 <div class="flex md:justify-end gap-4 mt-6">
-                    <a href="https://x.com/VoltafrikTech" class="text-white text-2xl hover:text-[#f57813] transition"><i class="bi bi-twitter-x"></i></a>
-                    <a href="https://www.linkedin.com/in/chukwuma-innocent-91aaaa284/" class="text-white text-2xl hover:text-[#f57813] transition"><i class="bi bi-linkedin"></i></a>
-                    <a href="https://www.instagram.com/voltafrik/" class="text-white text-2xl hover:text-[#f57813] transition"><i class="bi bi-instagram"></i></a>
-                    <a href="https://web.facebook.com/people/Voltafrik/61557974579735/" class="text-white text-2xl hover:text-[#f57813] transition"><i class="bi bi-facebook"></i></a>
+                    <a href="https://x.com/VoltafrikTech" class="text-white text-2xl hover:text-[#0070f3] transition"><i class="bi bi-twitter-x"></i></a>
+                    <a href="https://www.linkedin.com/in/chukwuma-innocent-91aaaa284/" class="text-white text-2xl hover:text-[#0070f3] transition"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/voltafrik/" class="text-white text-2xl hover:text-[#0070f3] transition"><i class="bi bi-instagram"></i></a>
+                    <a href="https://web.facebook.com/people/Voltafrik/61557974579735/" class="text-white text-2xl hover:text-[#0070f3] transition"><i class="bi bi-facebook"></i></a>
                 </div>
             </div>
         </div>
@@ -196,7 +196,7 @@
     </div>
 </footer>
 
-<a href="#" x-show="scrolled" x-cloak @click.prevent="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed right-5 bottom-5 w-12 h-12 bg-[#f57813] hover:bg-[#0a2540] text-white rounded-full flex items-center justify-center text-3xl transition-all hover:-translate-y-1 shadow-lg z-50">
+<a href="#" x-show="scrolled" x-cloak @click.prevent="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed right-5 bottom-5 w-12 h-12 bg-[#0070f3] hover:bg-[#0a2540] text-white rounded-full flex items-center justify-center text-3xl transition-all hover:-translate-y-1 shadow-lg z-50">
     <i class="bi bi-arrow-up-short"></i>
 </a>
 

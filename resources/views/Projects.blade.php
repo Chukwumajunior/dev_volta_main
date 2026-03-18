@@ -8,7 +8,7 @@
         <section class="relative pt-44 pb-24 text-white" style="background: linear-gradient(rgba(10, 37, 64, 0.9), rgba(10, 37, 64, 0.9)), url('https://images.unsplash.com/photo-1497435334941-8c899ee9e8e2?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);">
             <div class="container max-w-7xl mx-auto px-4" data-aos="fade-up">
                 <div class="max-w-2xl">
-                    <span class="inline-block bg-[#f57813] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Innovation</span>
+                    <span class="inline-block bg-[#0070f3] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Innovation</span>
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-white">
                         Building the <br><span class="text-[#38bdf8]">Future Ecosystem</span>
                     </h1>
@@ -26,7 +26,7 @@
                         <div class="bg-white rounded-3xl border border-gray-100 shadow-sm hover:-translate-y-4 hover:shadow-2xl transition-all duration-500 group overflow-hidden" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}" @mouseenter="selectedProject = {{ $project->id }}" @mouseleave="selectedProject = null">
                             <div class="relative h-64 overflow-hidden">
                                 <img src="{{ asset('storage/' . $project->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="{{ $project->title }}">
-                                <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-[#f57813] uppercase">Key Project</span>
+                                <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-[#0070f3] uppercase">Key Project</span>
                             </div>
                             <div class="p-5">
                                 <h4 class="font-extrabold text-xl mb-3">{{ $project->title }}</h4>
@@ -60,7 +60,7 @@
                 <div class="bg-gray-50 rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto border border-gray-200" data-aos="zoom-in">
                     <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Have a Good Location?</h2>
                     <p class="text-gray-600 text-lg mb-8 max-w-xl mx-auto">We are looking for places for our next solar bus stop projects.</p>
-                    <a href="/contact" class="inline-block bg-[#0a2540] hover:bg-[#f57813] text-white font-bold px-8 py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg">Suggest a Site</a>
+                    <a href="/contact" class="inline-block bg-[#0a2540] hover:bg-[#0070f3] text-white font-bold px-8 py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg">Suggest a Site</a>
                 </div>
             </div>
         </section>

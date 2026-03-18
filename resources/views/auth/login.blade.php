@@ -43,7 +43,7 @@
                                         type="email"
                                         name="email"
                                         x-model="email"
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition"
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition"
                                         required
                                         placeholder="your@email.com"
                                     >
@@ -56,21 +56,21 @@
                                             :type="showPassword ? 'text' : 'password'"
                                             name="password"
                                             x-model="password"
-                                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition pr-12"
+                                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition pr-12"
                                             required
                                             placeholder="••••••••"
                                         >
                                         <button
                                             type="button"
                                             @click="showPassword = !showPassword"
-                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#f57813] transition"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#0070f3] transition"
                                         >
                                             <i class="bi" :class="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
                                         </button>
                                     </div>
                                 </div>
 
-                                <button type="submit" class="w-full bg-[#f57813] hover:bg-[#e06b0c] text-white font-bold py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl mt-6">
+                                <button type="submit" class="w-full bg-[#0070f3] hover:bg-[#e06b0c] text-white font-bold py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl mt-6">
                                     Sign In
                                 </button>
 

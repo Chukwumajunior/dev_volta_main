@@ -56,7 +56,7 @@
                                         type="text"
                                         name="name"
                                         x-model="name"
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition"
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition"
                                         required
                                         placeholder="John Doe"
                                     >
@@ -68,7 +68,7 @@
                                         type="email"
                                         name="email"
                                         x-model="email"
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition"
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition"
                                         required
                                         placeholder="admin@voltafrik.com"
                                     >
@@ -80,7 +80,7 @@
                                         type="tel"
                                         name="tel"
                                         x-model="tel"
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition"
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition"
                                         required
                                         placeholder="+234..."
                                     >
@@ -93,27 +93,27 @@
                                             :type="showPassword ? 'text' : 'password'"
                                             name="password"
                                             x-model="password"
-                                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition pr-12"
+                                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition pr-12"
                                             required
                                             placeholder="••••••••"
                                         >
                                         <button
                                             type="button"
                                             @click="showPassword = !showPassword"
-                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#f57813] transition"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#0070f3] transition"
                                         >
                                             <i class="bi" :class="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
                                         </button>
                                     </div>
                                 </div>
 
-                                <button type="submit" class="w-full bg-[#0a2540] hover:bg-[#f57813] text-white font-bold py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl mt-6">
+                                <button type="submit" class="w-full bg-[#0a2540] hover:bg-[#0070f3] text-white font-bold py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl mt-6">
                                     Register Admin
                                 </button>
 
                                 <p class="text-center text-sm text-gray-600 mt-4">
                                     Already have access?
-                                    <a href="{{ route('login') }}" class="text-[#f57813] font-bold hover:underline">Sign in</a>
+                                    <a href="{{ route('login') }}" class="text-[#0070f3] font-bold hover:underline">Sign in</a>
                                 </p>
                             </div>
                         </form>

@@ -41,19 +41,19 @@
 
                         <div>
                             <label for="title" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Title</label>
-                            <input type="text" name="title" id="title" x-model="title" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition" required>
+                            <input type="text" name="title" id="title" x-model="title" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition" required>
                             @error('title') <p class="text-red-500 text-xs mt-1 font-semibold">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
                             <label for="body" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Body</label>
-                            <textarea name="body" id="body" x-model="body" rows="6" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition" required></textarea>
+                            <textarea name="body" id="body" x-model="body" rows="6" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition" required></textarea>
                             @error('body') <p class="text-red-500 text-xs mt-1 font-semibold">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
                             <label for="image" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Image</label>
-                            <input type="file" name="image" id="image" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-[#f57813] hover:file:bg-orange-100">
+                            <input type="file" name="image" id="image" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-[#0070f3] hover:file:bg-orange-100">
                             @if($post->image)
                                 <div class="mt-3">
                                     <img src="{{ asset('storage/' . $post->image) }}" class="rounded-xl border border-gray-200" width="200">
@@ -64,7 +64,7 @@
 
                         <div>
                             <label for="category" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Category</label>
-                            <select name="category" id="category" x-model="category" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition bg-white" required>
+                            <select name="category" id="category" x-model="category" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition bg-white" required>
                                 <option value="">Select Category</option>
                                 <option value="Updates">Updates</option>
                                 <option value="renewable energy">Renewable Energy</option>
@@ -81,7 +81,7 @@
 
                         <div>
                             <label for="type" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Post Type</label>
-                            <select name="type" id="type" x-model="type" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition bg-white" required>
+                            <select name="type" id="type" x-model="type" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition bg-white" required>
                                 <option value="info">Info</option>
                                 <option value="store">Store</option>
                             </select>
@@ -90,12 +90,12 @@
 
                         <div x-show="type==='store'" x-cloak x-transition>
                             <label for="price" class="block text-xs font-bold uppercase tracking-wide text-gray-600 mb-2">Price ({{ get_currency() }})</label>
-                            <input type="number" name="price" id="price" x-model="price" step="0.01" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#f57813] focus:ring-4 focus:ring-orange-100 outline-none transition">
+                            <input type="number" name="price" id="price" x-model="price" step="0.01" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0070f3] focus:ring-4 focus:ring-orange-100 outline-none transition">
                             @error('price') <p class="text-red-500 text-xs mt-1 font-semibold">{{ $message }}</p> @enderror
                         </div>
 
                         <div class="pt-4 flex gap-3">
-                            <button type="submit" class="flex-1 bg-[#f57813] hover:bg-[#e06b0c] text-white font-bold py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl">Update Post</button>
+                            <button type="submit" class="flex-1 bg-[#0070f3] hover:bg-[#e06b0c] text-white font-bold py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl">Update Post</button>
                         </div>
 
                     </div>
@@ -103,7 +103,7 @@
             </div>
 
             <div class="mt-8" x-show="title || body" x-cloak>
-                <button @click="showPreview=!showPreview" class="text-[#f57813] font-semibold flex items-center gap-2 mx-auto">
+                <button @click="showPreview=!showPreview" class="text-[#0070f3] font-semibold flex items-center gap-2 mx-auto">
                     <i class="bi" :class="showPreview?'bi-chevron-up':'bi-chevron-down'"></i>
                     <span x-text="showPreview?'Hide Preview':'Show Preview'"></span>
                 </button>
@@ -111,7 +111,7 @@
                     <h3 class="text-xl font-bold mb-2" x-text="title || 'Untitled'"></h3>
                     <p class="text-sm text-gray-600 mb-3" x-text="category ? `Category: ${category}` : ''"></p>
                     <p class="text-gray-700" x-text="body ? body.substring(0, 200) + (body.length>200?'...':'') : ''"></p>
-                    <p x-show="type==='store' && price" class="mt-3 text-[#f57813] font-bold" x-text="`$${parseFloat(price).toFixed(2)}`"></p>
+                    <p x-show="type==='store' && price" class="mt-3 text-[#0070f3] font-bold" x-text="`$${parseFloat(price).toFixed(2)}`"></p>
                 </div>
             </div>
 

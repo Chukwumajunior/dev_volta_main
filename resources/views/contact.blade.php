@@ -6,7 +6,7 @@
     <div x-data="contactForm()" class="overflow-hidden">
         <section class="relative pt-40 pb-24 text-white" style="background: linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop') center/cover no-repeat; clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);">
             <div class="container max-w-7xl mx-auto px-4 text-center" data-aos="fade-up">
-                <span class="inline-block bg-[#f57813] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Start Your Project</span>
+                <span class="inline-block bg-[#0070f3] text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Start Your Project</span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-white">Let's Build Something Amazing</h1>
                 <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">Ready to bring your web project to life? Get in touch with our development team to discuss your ideas.</p>
             </div>
@@ -16,19 +16,19 @@
             <div class="container max-w-7xl mx-auto px-4">
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                     <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
-                        <i class="bi bi-envelope-paper text-4xl text-[#f57813] mb-5 block"></i>
+                        <i class="bi bi-envelope-paper text-4xl text-[#0070f3] mb-5 block"></i>
                         <h5 class="font-bold text-xl mb-3">Project Inquiries</h5>
                         <p class="text-gray-600 text-sm mb-3">For new projects and collaborations:</p>
-                        <a href="mailto:projects@voltafrik.com.ng" class="text-[#0a2540] font-bold hover:text-[#f57813] transition">projects@voltafrik.com.ng</a>
+                        <a href="mailto:projects@voltafrik.com.ng" class="text-[#0a2540] font-bold hover:text-[#0070f3] transition">projects@voltafrik.com.ng</a>
                     </div>
                     <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-                        <i class="bi bi-chat-left-dots text-4xl text-[#f57813] mb-5 block"></i>
+                        <i class="bi bi-chat-left-dots text-4xl text-[#0070f3] mb-5 block"></i>
                         <h5 class="font-bold text-xl mb-3">Quick Chat</h5>
                         <p class="text-gray-600 text-sm mb-3">Message our dev team on WhatsApp:</p>
-                        <a href="https://wa.me/2349046282789" target="_blank" class="text-[#0a2540] font-bold hover:text-[#f57813] transition">+234 904 628 2789</a>
+                        <a href="https://wa.me/2349046282789" target="_blank" class="text-[#0a2540] font-bold hover:text-[#0070f3] transition">+234 904 628 2789</a>
                     </div>
                     <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 lg:col-span-1 md:col-span-2 md:max-w-md md:mx-auto lg:max-w-none" data-aos="fade-up" data-aos-delay="300">
-                        <i class="bi bi-geo-alt text-4xl text-[#f57813] mb-5 block"></i>
+                        <i class="bi bi-geo-alt text-4xl text-[#0070f3] mb-5 block"></i>
                         <h5 class="font-bold text-xl mb-3">Development Hub</h5>
                         <p class="text-gray-600 text-sm mb-1">24 Thomas Drive, Akoka,</p>
                         <p class="text-[#0a2540] font-bold">Lagos, Nigeria</p>
@@ -60,7 +60,7 @@
 
                         <div class="mt-8 p-5 bg-blue-50 rounded-2xl border border-blue-100">
                             <div class="flex items-center gap-3 mb-2">
-                                <i class="bi bi-stars text-[#f57813] text-2xl"></i>
+                                <i class="bi bi-stars text-[#0070f3] text-2xl"></i>
                                 <span class="font-bold text-[#0a2540]">Current Stack</span>
                             </div>
                             <div class="flex flex-wrap gap-2">
@@ -81,23 +81,23 @@
                                 <div class="space-y-5">
                                     <div>
                                         <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Full Name</label>
-                                        <input type="text" name="name" value="{{ old('name') }}" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-[#f57813] transition" placeholder="John Doe">
+                                        <input type="text" name="name" value="{{ old('name') }}" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-[#0070f3] transition" placeholder="John Doe">
                                     </div>
                                     <div>
                                         <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Email Address</label>
-                                        <input type="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-[#f57813] transition" placeholder="john@company.com">
+                                        <input type="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-[#0070f3] transition" placeholder="john@company.com">
                                     </div>
                                     <div>
                                         <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Phone Number</label>
-                                        <input type="tel" name="number" value="{{ old('number') }}" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-[#f57813] transition" placeholder="+234...">
+                                        <input type="tel" name="number" value="{{ old('number') }}" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-[#0070f3] transition" placeholder="+234...">
                                     </div>
                                     <div>
                                         <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Project Details</label>
-                                        <textarea name="message" rows="5" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-[#f57813] transition" placeholder="Tell us about your project requirements, timeline, and budget..." x-model="messageText">{{ old('message') }}</textarea>
+                                        <textarea name="message" rows="5" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-100 focus:border-[#0070f3] transition" placeholder="Tell us about your project requirements, timeline, and budget..." x-model="messageText">{{ old('message') }}</textarea>
                                     </div>
 
                                     <div>
-                                        <button type="submit" class="w-full bg-[#0a2540] hover:bg-[#f57813] text-white font-bold py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl">Send Message</button>
+                                        <button type="submit" class="w-full bg-[#0a2540] hover:bg-[#0070f3] text-white font-bold py-4 rounded-full text-lg transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl">Send Message</button>
                                     </div>
                                 </div>
                             </form>
