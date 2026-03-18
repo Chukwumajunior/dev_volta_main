@@ -6,7 +6,7 @@
     <title>@yield('title', 'Voltafrik | Web Development & Tech Training')</title>
     <meta name="description" content="@yield('meta_description', 'Voltafrik - Web development company and tech training provider in Nigeria.')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/dark_logo_full2.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/light_logo_image.png') }}">
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="google-site-verification" content="TMjY9SBbb8mbeW8MKfZC1L5IEF6yyNdhPHTOwdHmG3k" />
@@ -23,8 +23,8 @@
 <nav class="fixed top-0 w-full z-50 py-4 transition-all duration-300" :class="{ 'backdrop-blur-md bg-white/80 border-b border-black/5': true }">
     <div class="container max-w-7xl mx-auto px-4 flex items-center justify-between">
         <a href="/" class="flex items-center gap-2">
-            <img src="{{ asset('assets/img/logo/dark_logo_full2.png') }}" alt="Voltafrik" class="h-10 w-auto">
-            <span class="font-extrabold text-2xl tracking-tighter">VOLTAFRIK</span>
+            <img src="{{ asset('assets/img/logo/light_logo_image.png') }}" alt="Voltafrik" class="h-10 w-auto" style="border-radius: 10px">
+            <span class="font-extrabold text-2xl tracking-tighter" style="color: #0070f3">VOLTAFRIK</span>
         </a>
         <button class="lg:hidden text-2xl" @click="mobileMenuOpen = !mobileMenuOpen">
             <i class="bi bi-list"></i>
